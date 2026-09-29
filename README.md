@@ -95,7 +95,7 @@ flowchart TD
 
 ## 5. Technology Stack
 
-* **Frontend Framework**: Next.js 15.2.1 (App Router, Server & Client Components)
+* **Frontend Framework**: Next.js 15.5.26 (Patched against CVE-2025-66478, App Router, Server & Client Components)
 * **Core Library**: React 19.0.0
 * **Styling & Design System**: Tailwind CSS 3.4.17 with SCADA industrial theme & custom Dark/Light Mode plugin
 * **Programming Language**: TypeScript 5.8.2 (Strict type checking, zero `any`)

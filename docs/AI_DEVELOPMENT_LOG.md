@@ -42,6 +42,10 @@
      - ESLint Analysis (`npm run lint`): 0 Errors, 0 Warnings
      - Next.js Production Build (`npm run build`): คอมไพล์สำเร็จทั้ง 11 Routes (Static & Dynamic)
 
+5. **Next.js Security Upgrade for Vercel Deployment (CVE-2025-66478 Patch)**
+   - *ปัญหาที่พบ:* Vercel ตรวจพบค่านโยบายความปลอดภัยแจ้งเตือนว่า Next.js เวอร์ชันเก่า (15.2.1) มีช่องโหว่ความปลอดภัย และปฏิเสธการ Build บน Vercel
+   - *การแก้ไข:* อัปเกรด `next` และ `eslint-config-next` ขึ้นสู่เวอร์ชันล่าสุดที่ปลอดภัย `15.5.26` พร้อมทดสอบคอมไพล์ Production Build ใหม่ ผลการคอมไพล์ผ่าน 11/11 Routes อย่างสมบูรณ์แบบ
+
 ---
 
 ## 3. Reflection on AI Pair-Programming
