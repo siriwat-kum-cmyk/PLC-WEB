@@ -16,23 +16,31 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem("plc_theme") as Theme | null;
-    if (saved) {
-      setTheme(saved);
-      document.documentElement.classList.toggle("light", saved === "light");
+    const initialTheme: Theme = saved === "light" ? "light" : "dark";
+    setTheme(initialTheme);
+
+    const root = document.documentElement;
+    if (initialTheme === "light") {
+      root.classList.add("light");
+      root.classList.remove("dark");
     } else {
-      setTheme("dark");
-      document.documentElement.classList.remove("light");
+      root.classList.add("dark");
+      root.classList.remove("light");
     }
   }, []);
 
   const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
+    const next: Theme = theme === "dark" ? "light" : "dark";
     setTheme(next);
     localStorage.setItem("plc_theme", next);
+
+    const root = document.documentElement;
     if (next === "light") {
-      document.documentElement.classList.add("light");
+      root.classList.add("light");
+      root.classList.remove("dark");
     } else {
-      document.documentElement.classList.remove("light");
+      root.classList.add("dark");
+      root.classList.remove("light");
     }
   };
 

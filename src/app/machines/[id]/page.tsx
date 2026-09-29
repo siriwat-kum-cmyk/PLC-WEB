@@ -7,19 +7,14 @@ import { useData } from "@/context/data-context";
 import {
   Cpu,
   ArrowLeft,
-  Calendar,
   MapPin,
   Clock,
   AlertTriangle,
   Wrench,
-  CheckCircle2,
-  FileText,
   Activity,
-  User,
 } from "lucide-react";
 import {
   getMachineStatusBadge,
-  getAlarmSeverityBadge,
   getAlarmStatusBadge,
   getMaintenanceStatusBadge,
   formatDate,

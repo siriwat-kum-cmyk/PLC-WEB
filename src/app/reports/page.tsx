@@ -10,7 +10,6 @@ import {
   AlertTriangle,
   Wrench,
   CheckCircle,
-  FileText,
 } from "lucide-react";
 
 export default function ReportsPage() {
@@ -93,13 +92,13 @@ export default function ReportsPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-slate-800 light:border-slate-200">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2 light:text-slate-900">
-              <FileSpreadsheet className="w-5 h-5 text-emerald-400" />
+              <FileSpreadsheet className="w-5 h-5 text-emerald-400 light:text-emerald-600" />
               <span>Data Export & Reports (ส่งออกข้อมูล CSV / Excel)</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-mono">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-mono light:bg-amber-100 light:text-amber-800 light:border-amber-300">
                 Bonus Feature
               </span>
             </h1>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-400 light:text-slate-600 mt-1">
               ดาวน์โหลดรายงานฐานข้อมูลเป็นไฟล์ CSV พร้อมเปิดใช้งานใน Microsoft Excel และ Google Sheets
             </p>
           </div>
@@ -107,8 +106,8 @@ export default function ReportsPage() {
 
         {/* Feedback Alert */}
         {downloadSuccess && (
-          <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2 animate-in fade-in">
-            <CheckCircle className="w-4 h-4 text-emerald-400" />
+          <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 light:bg-emerald-50 light:text-emerald-800 light:border-emerald-300 text-xs flex items-center gap-2 animate-in fade-in">
+            <CheckCircle className="w-4 h-4 text-emerald-400 light:text-emerald-600" />
             <span>{downloadSuccess}</span>
           </div>
         )}
@@ -118,14 +117,14 @@ export default function ReportsPage() {
           {/* Card 1: Machine Master Export */}
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-5 shadow-lg flex flex-col justify-between light:bg-white light:border-slate-200">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 light:text-cyan-700 light:bg-cyan-50 light:border-cyan-300 mb-3">
                 <Cpu className="w-5 h-5" />
               </div>
               <h3 className="text-sm font-bold text-white mb-1 light:text-slate-900">Machine Master Report</h3>
-              <p className="text-xs text-slate-400 mb-4">
+              <p className="text-xs text-slate-400 light:text-slate-600 mb-4">
                 รายชื่อเครื่องจักรทั้งหมด สเปก ตำแหน่งที่ตั้ง และสถานะการทำงานปัจจุบัน
               </p>
-              <div className="text-xs font-mono text-cyan-400 bg-cyan-500/5 px-2.5 py-1.5 rounded border border-cyan-500/20 mb-4">
+              <div className="text-xs font-mono text-cyan-400 bg-cyan-500/5 px-2.5 py-1.5 rounded border border-cyan-500/20 mb-4 light:bg-cyan-50 light:text-cyan-800 light:border-cyan-300">
                 จำนวน: {machines.length} เครื่องจักร
               </div>
             </div>
@@ -141,14 +140,14 @@ export default function ReportsPage() {
           {/* Card 2: Alarms Export */}
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-5 shadow-lg flex flex-col justify-between light:bg-white light:border-slate-200">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 mb-3">
+              <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 light:text-rose-700 light:bg-rose-50 light:border-rose-300 mb-3">
                 <AlertTriangle className="w-5 h-5" />
               </div>
               <h3 className="text-sm font-bold text-white mb-1 light:text-slate-900">Alarms History Report</h3>
-              <p className="text-xs text-slate-400 mb-4">
+              <p className="text-xs text-slate-400 light:text-slate-600 mb-4">
                 ประวัติสัญญาณเตือนทั้งหมด ระดับความรุนแรง สาเหตุ และแนวทางการแก้ไข
               </p>
-              <div className="text-xs font-mono text-rose-400 bg-rose-500/5 px-2.5 py-1.5 rounded border border-rose-500/20 mb-4">
+              <div className="text-xs font-mono text-rose-400 bg-rose-500/5 px-2.5 py-1.5 rounded border border-rose-500/20 mb-4 light:bg-rose-50 light:text-rose-800 light:border-rose-300">
                 จำนวน: {alarms.length} รายการสัญญาณเตือน
               </div>
             </div>
@@ -164,14 +163,14 @@ export default function ReportsPage() {
           {/* Card 3: Maintenance Export */}
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-5 shadow-lg flex flex-col justify-between light:bg-white light:border-slate-200">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 light:text-amber-700 light:bg-amber-50 light:border-amber-300 mb-3">
                 <Wrench className="w-5 h-5" />
               </div>
               <h3 className="text-sm font-bold text-white mb-1 light:text-slate-900">Maintenance Work Orders</h3>
-              <p className="text-xs text-slate-400 mb-4">
+              <p className="text-xs text-slate-400 light:text-slate-600 mb-4">
                 บันทึกใบสั่งซ่อมบำรุงเชิงป้องกัน (PM) และแก้ปัญหา (BM) รวมถึงสถานะรออะไหล่
               </p>
-              <div className="text-xs font-mono text-amber-400 bg-amber-500/5 px-2.5 py-1.5 rounded border border-amber-500/20 mb-4">
+              <div className="text-xs font-mono text-amber-400 bg-amber-500/5 px-2.5 py-1.5 rounded border border-amber-500/20 mb-4 light:bg-amber-50 light:text-amber-800 light:border-amber-300">
                 จำนวน: {maintenance.length} ใบสั่งซ่อม
               </div>
             </div>

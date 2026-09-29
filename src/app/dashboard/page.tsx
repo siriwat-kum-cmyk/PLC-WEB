@@ -12,13 +12,9 @@ import {
   StopCircle,
   AlertTriangle,
   Wrench,
-  Clock,
-  ArrowUpRight,
   PlusCircle,
   CheckCircle2,
-  PackageOpen,
   ChevronRight,
-  TrendingUp,
 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
@@ -37,11 +33,11 @@ export default function DashboardPage() {
           <div>
             <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2 light:text-slate-900">
               <span>Plant Automation SCADA Dashboard</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-mono font-normal">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-mono font-normal light:bg-cyan-50 light:text-cyan-800 light:border-cyan-300">
                 Real-Time
               </span>
             </h1>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-400 light:text-slate-600 mt-1">
               ระบบภาพรวมติดตามสัญญาณเตือนและสถานะเครื่องจักรสายการผลิตอัตโนมัติ
             </p>
           </div>
@@ -59,9 +55,9 @@ export default function DashboardPage() {
             {(isAdmin || isTechnician) && (
               <Link
                 href="/alarms"
-                className="px-3 py-1.5 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/30 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors"
+                className="px-3 py-1.5 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/30 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors light:bg-rose-50 light:text-rose-700 light:border-rose-300"
               >
-                <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+                <AlertTriangle className="w-3.5 h-3.5 text-rose-400 light:text-rose-600" />
                 <span>แจ้งเตือน Alarm</span>
               </Link>
             )}
@@ -72,15 +68,15 @@ export default function DashboardPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
           {/* Card 1: Total Machines */}
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-4 shadow-lg light:bg-white light:border-slate-200">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
+            <div className="flex items-center justify-between text-slate-400 light:text-slate-600 mb-2">
               <span className="text-xs font-medium">เครื่องจักรทั้งหมด</span>
-              <Cpu className="w-4 h-4 text-cyan-400" />
+              <Cpu className="w-4 h-4 text-cyan-400 light:text-cyan-600" />
             </div>
             <div className="text-2xl font-bold font-mono text-white light:text-slate-900">
               {stats.totalMachines}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
-              <span className="text-emerald-400 font-mono">
+            <div className="text-[11px] text-slate-400 light:text-slate-600 mt-1 flex items-center gap-1">
+              <span className="text-emerald-400 light:text-emerald-600 font-mono font-bold">
                 {stats.totalMachines > 0
                   ? Math.round((stats.runningMachines / stats.totalMachines) * 100)
                   : 0}
@@ -92,65 +88,65 @@ export default function DashboardPage() {
 
           {/* Card 2: Running Machines */}
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-4 shadow-lg light:bg-white light:border-slate-200">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
+            <div className="flex items-center justify-between text-slate-400 light:text-slate-600 mb-2">
               <span className="text-xs font-medium">กำลังทำงาน (Running)</span>
-              <PlayCircle className="w-4 h-4 text-emerald-400" />
+              <PlayCircle className="w-4 h-4 text-emerald-400 light:text-emerald-600" />
             </div>
-            <div className="text-2xl font-bold font-mono text-emerald-400">
+            <div className="text-2xl font-bold font-mono text-emerald-400 light:text-emerald-600">
               {stats.runningMachines}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">เครื่องจักรในสายการผลิต</div>
+            <div className="text-[11px] text-slate-400 light:text-slate-600 mt-1">เครื่องจักรในสายการผลิต</div>
           </div>
 
           {/* Card 3: Stopped Machines */}
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-4 shadow-lg light:bg-white light:border-slate-200">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
+            <div className="flex items-center justify-between text-slate-400 light:text-slate-600 mb-2">
               <span className="text-xs font-medium">หยุดทำงาน (Stopped)</span>
-              <StopCircle className="w-4 h-4 text-slate-400" />
+              <StopCircle className="w-4 h-4 text-slate-400 light:text-slate-500" />
             </div>
             <div className="text-2xl font-bold font-mono text-slate-300 light:text-slate-700">
               {stats.stoppedMachines}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">ปิดระบบหรือพักเครื่อง</div>
+            <div className="text-[11px] text-slate-400 light:text-slate-600 mt-1">ปิดระบบหรือพักเครื่อง</div>
           </div>
 
           {/* Card 4: Alarm Machines */}
           <div
             className={`border rounded-xl p-4 shadow-lg transition-all ${
               stats.alarmMachines > 0
-                ? "bg-rose-500/10 border-rose-500/40"
+                ? "bg-rose-500/10 border-rose-500/40 light:bg-rose-50 light:border-rose-300"
                 : "bg-[#121824] border-slate-800 light:bg-white light:border-slate-200"
             }`}
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-medium text-rose-300">สัญญาณเตือน (Alarm)</span>
+            <div className="flex items-center justify-between text-slate-400 light:text-slate-600 mb-2">
+              <span className="text-xs font-medium text-rose-300 light:text-rose-700">สัญญาณเตือน (Alarm)</span>
               <AlertTriangle
                 className={`w-4 h-4 ${
-                  stats.alarmMachines > 0 ? "text-rose-400 animate-bounce" : "text-slate-400"
+                  stats.alarmMachines > 0 ? "text-rose-400 light:text-rose-600 animate-bounce" : "text-slate-400 light:text-slate-500"
                 }`}
               />
             </div>
-            <div className="text-2xl font-bold font-mono text-rose-400">
+            <div className="text-2xl font-bold font-mono text-rose-400 light:text-rose-600">
               {stats.alarmMachines}
             </div>
-            <div className="text-[11px] text-rose-300/80 mt-1">
+            <div className="text-[11px] text-rose-300/80 light:text-rose-700 mt-1">
               {stats.openAlarms} รายการรอตรวจสอบ
             </div>
           </div>
 
           {/* Card 5: Maintenance Machines */}
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-4 shadow-lg light:bg-white light:border-slate-200">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
+            <div className="flex items-center justify-between text-slate-400 light:text-slate-600 mb-2">
               <span className="text-xs font-medium">กำลังซ่อมบำรุง</span>
-              <Wrench className="w-4 h-4 text-amber-400" />
+              <Wrench className="w-4 h-4 text-amber-400 light:text-amber-600" />
             </div>
-            <div className="text-2xl font-bold font-mono text-amber-400">
+            <div className="text-2xl font-bold font-mono text-amber-400 light:text-amber-600">
               {stats.maintenanceMachines}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1 flex items-center gap-1.5">
+            <div className="text-[11px] text-slate-400 light:text-slate-600 mt-1 flex items-center gap-1.5">
               <span>{stats.pendingMaintenance} งานค้าง</span>
               {stats.waitingPartMaintenance > 0 && (
-                <span className="text-purple-400 font-medium">
+                <span className="text-purple-400 light:text-purple-700 font-medium">
                   ({stats.waitingPartMaintenance} รออะไหล่)
                 </span>
               )}
@@ -167,14 +163,14 @@ export default function DashboardPage() {
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-5 shadow-lg light:bg-white light:border-slate-200">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4 text-rose-400" />
-                <h3 className="text-sm font-bold text-slate-200 light:text-slate-800">
+                <AlertTriangle className="w-4 h-4 text-rose-400 light:text-rose-600" />
+                <h3 className="text-sm font-bold text-slate-200 light:text-slate-900">
                   Active Alarms (สัญญาณเตือนที่ยังเปิดอยู่)
                 </h3>
               </div>
               <Link
                 href="/alarms"
-                className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+                className="text-xs text-cyan-400 hover:text-cyan-300 light:text-cyan-700 light:hover:text-cyan-900 flex items-center gap-1 font-medium"
               >
                 <span>ดูทั้งหมด</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -182,7 +178,7 @@ export default function DashboardPage() {
             </div>
 
             {activeAlarms.length === 0 ? (
-              <div className="p-6 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-center text-xs text-emerald-400 flex items-center justify-center gap-2">
+              <div className="p-6 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-center text-xs text-emerald-400 light:bg-emerald-50 light:border-emerald-300 light:text-emerald-700 flex items-center justify-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>ไม่มีสัญญาณเตือนค้างในระบบ เครื่องจักรทำงานปกติ</span>
               </div>
@@ -199,19 +195,19 @@ export default function DashboardPage() {
                         <span
                           className={`px-2 py-0.5 rounded font-mono font-bold text-[11px] ${
                             alarm.severity === "Critical"
-                              ? "bg-red-500/20 text-red-400 border border-red-500/30"
+                              ? "bg-red-500/20 text-red-400 border border-red-500/30 light:bg-red-100 light:text-red-800 light:border-red-300"
                               : alarm.severity === "High"
-                              ? "bg-rose-500/20 text-rose-400 border border-rose-500/30"
-                              : "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                              ? "bg-rose-500/20 text-rose-400 border border-rose-500/30 light:bg-rose-100 light:text-rose-800 light:border-rose-300"
+                              : "bg-amber-500/20 text-amber-400 border border-amber-500/30 light:bg-amber-100 light:text-amber-800 light:border-amber-300"
                           }`}
                         >
                           {alarm.alarm_code}
                         </span>
                         <div>
-                          <div className="font-semibold text-slate-200 light:text-slate-800">
+                          <div className="font-semibold text-slate-200 light:text-slate-900">
                             {alarm.description}
                           </div>
-                          <div className="text-[11px] text-slate-400 font-mono">
+                          <div className="text-[11px] text-slate-400 light:text-slate-600 font-mono">
                             {m?.machine_id} - {m?.name} • {formatDate(alarm.triggered_at)}
                           </div>
                         </div>
@@ -219,8 +215,8 @@ export default function DashboardPage() {
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-mono shrink-0 ${
                           alarm.status === "Open"
-                            ? "bg-rose-500/20 text-rose-300 border border-rose-500/30"
-                            : "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                            ? "bg-rose-500/20 text-rose-300 border border-rose-500/30 light:bg-rose-100 light:text-rose-800 light:border-rose-300"
+                            : "bg-amber-500/20 text-amber-300 border border-amber-500/30 light:bg-amber-100 light:text-amber-800 light:border-amber-300"
                         }`}
                       >
                         {alarm.status}
@@ -236,14 +232,14 @@ export default function DashboardPage() {
           <div className="bg-[#121824] border border-slate-800 rounded-xl p-5 shadow-lg light:bg-white light:border-slate-200">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <Wrench className="w-4 h-4 text-amber-400" />
-                <h3 className="text-sm font-bold text-slate-200 light:text-slate-800">
+                <Wrench className="w-4 h-4 text-amber-400 light:text-amber-600" />
+                <h3 className="text-sm font-bold text-slate-200 light:text-slate-900">
                   Maintenance Orders (งานซ่อมบำรุงที่กำลังดำเนินการ)
                 </h3>
               </div>
               <Link
                 href="/maintenance"
-                className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+                className="text-xs text-cyan-400 hover:text-cyan-300 light:text-cyan-700 light:hover:text-cyan-900 flex items-center gap-1 font-medium"
               >
                 <span>ดูทั้งหมด</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -251,7 +247,7 @@ export default function DashboardPage() {
             </div>
 
             {ongoingMaintenance.length === 0 ? (
-              <div className="p-6 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-center text-xs text-emerald-400 flex items-center justify-center gap-2">
+              <div className="p-6 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-center text-xs text-emerald-400 light:bg-emerald-50 light:border-emerald-300 light:text-emerald-700 flex items-center justify-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>ไม่มีงานซ่อมบำรุงคงค้าง</span>
               </div>
@@ -265,14 +261,14 @@ export default function DashboardPage() {
                       className="p-3 rounded-lg bg-slate-900/60 border border-slate-800 flex items-center justify-between gap-3 text-xs light:bg-slate-50 light:border-slate-200"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="px-2 py-0.5 rounded font-mono text-[10px] bg-slate-800 text-cyan-300 border border-slate-700">
+                        <span className="px-2 py-0.5 rounded font-mono text-[10px] bg-slate-800 text-cyan-300 border border-slate-700 light:bg-slate-200 light:text-slate-800 light:border-slate-300">
                           {maint.maintenance_type.split(" ")[0]}
                         </span>
                         <div>
-                          <div className="font-semibold text-slate-200 light:text-slate-800 truncate max-w-xs">
+                          <div className="font-semibold text-slate-200 light:text-slate-900 truncate max-w-xs">
                             {maint.problem}
                           </div>
-                          <div className="text-[11px] text-slate-400 font-mono">
+                          <div className="text-[11px] text-slate-400 light:text-slate-600 font-mono">
                             {m?.machine_id} • ช่าง: {maint.technician_name}
                           </div>
                         </div>
@@ -280,10 +276,10 @@ export default function DashboardPage() {
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-mono shrink-0 ${
                           maint.status === "Waiting Part"
-                            ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 animate-pulse font-bold"
+                            ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 animate-pulse font-bold light:bg-purple-100 light:text-purple-800 light:border-purple-300"
                             : maint.status === "In Progress"
-                            ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
-                            : "bg-slate-700 text-slate-300"
+                            ? "bg-blue-500/20 text-blue-300 border border-blue-500/30 light:bg-blue-100 light:text-blue-800 light:border-blue-300"
+                            : "bg-slate-700 text-slate-300 light:bg-slate-200 light:text-slate-800"
                         }`}
                       >
                         {maint.status}

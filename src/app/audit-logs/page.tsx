@@ -6,12 +6,7 @@ import { useData } from "@/context/data-context";
 import {
   ShieldCheck,
   Search,
-  Filter,
-  Clock,
   User,
-  Activity,
-  Layers,
-  FileText,
 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
@@ -41,13 +36,13 @@ export default function AuditLogsPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-slate-800 light:border-slate-200">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2 light:text-slate-900">
-              <ShieldCheck className="w-5 h-5 text-cyan-400" />
+              <ShieldCheck className="w-5 h-5 text-cyan-400 light:text-cyan-600" />
               <span>Plant Audit Logs (บันทึกประวัติการเปลี่ยนแปลงของระบบ)</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-mono">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-mono light:bg-amber-100 light:text-amber-800 light:border-amber-300">
                 Bonus Feature
               </span>
             </h1>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-400 light:text-slate-600 mt-1">
               ตรวจสอบประวัติการเพิ่ม แก้ไข ลบ และเปลี่ยนสถานะเครื่องจักร สัญญาณเตือน และงานซ่อมบำรุง
             </p>
           </div>
@@ -63,7 +58,7 @@ export default function AuditLogsPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="ค้นหาผู้ปฏิบัติงาน หรือ ID รายการ..."
-                className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors light:bg-slate-50 light:text-slate-900"
+                className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors light:bg-slate-50 light:border-slate-300 light:text-slate-900"
               />
             </div>
 
@@ -71,7 +66,7 @@ export default function AuditLogsPage() {
               <select
                 value={entityFilter}
                 onChange={(e) => setEntityFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:text-slate-900 font-mono"
+                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:border-slate-300 light:text-slate-900 font-mono"
               >
                 <option value="ALL">หมวดข้อมูลทั้งหมด (All Entities)</option>
                 <option value="Machine">Machine (เครื่องจักร)</option>
@@ -84,7 +79,7 @@ export default function AuditLogsPage() {
               <select
                 value={actionFilter}
                 onChange={(e) => setActionFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:text-slate-900 font-mono"
+                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:border-slate-300 light:text-slate-900 font-mono"
               >
                 <option value="ALL">การกระทำทั้งหมด (All Actions)</option>
                 <option value="CREATE">CREATE (สร้างใหม่)</option>
@@ -98,7 +93,7 @@ export default function AuditLogsPage() {
 
         {/* Audit Log Table */}
         <div className="bg-[#121824] border border-slate-800 rounded-xl shadow-lg overflow-hidden light:bg-white light:border-slate-200">
-          <div className="p-4 border-b border-slate-800 text-xs text-slate-400 font-mono flex justify-between light:border-slate-200">
+          <div className="p-4 border-b border-slate-800 text-xs text-slate-400 light:text-slate-600 font-mono flex justify-between light:border-slate-200">
             <span>บันทึกทั้งหมด: {filteredLogs.length} รายการ</span>
             <span>ความปลอดภัยและมาตรฐาน ISO/Audit</span>
           </div>
@@ -110,7 +105,7 @@ export default function AuditLogsPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-900/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800 light:bg-slate-50 light:border-slate-200">
+                <thead className="bg-slate-900/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800 light:bg-slate-100 light:text-slate-700 light:border-slate-200">
                   <tr>
                     <th className="px-5 py-3 font-semibold">Timestamp</th>
                     <th className="px-5 py-3 font-semibold">User</th>
@@ -122,10 +117,10 @@ export default function AuditLogsPage() {
                 <tbody className="divide-y divide-slate-800/60 light:divide-slate-200">
                   {filteredLogs.map((log) => {
                     const actionStyles: Record<string, string> = {
-                      CREATE: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
-                      UPDATE: "bg-blue-500/10 text-blue-400 border-blue-500/30",
-                      DELETE: "bg-rose-500/10 text-rose-400 border-rose-500/30",
-                      STATUS_CHANGE: "bg-amber-500/10 text-amber-400 border-amber-500/30",
+                      CREATE: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 light:bg-emerald-50 light:text-emerald-800 light:border-emerald-300",
+                      UPDATE: "bg-blue-500/10 text-blue-400 border-blue-500/30 light:bg-blue-50 light:text-blue-800 light:border-blue-300",
+                      DELETE: "bg-rose-500/10 text-rose-400 border-rose-500/30 light:bg-rose-50 light:text-rose-800 light:border-rose-300",
+                      STATUS_CHANGE: "bg-amber-500/10 text-amber-400 border-amber-500/30 light:bg-amber-50 light:text-amber-800 light:border-amber-300",
                     };
 
                     return (
@@ -133,11 +128,11 @@ export default function AuditLogsPage() {
                         key={log.id}
                         className="hover:bg-slate-800/30 transition-colors light:hover:bg-slate-50"
                       >
-                        <td className="px-5 py-3.5 font-mono text-slate-400">
+                        <td className="px-5 py-3.5 font-mono text-slate-400 light:text-slate-600">
                           {formatDate(log.created_at)}
                         </td>
                         <td className="px-5 py-3.5">
-                          <div className="flex items-center gap-1.5 font-medium text-slate-200 light:text-slate-800">
+                          <div className="flex items-center gap-1.5 font-medium text-slate-200 light:text-slate-900">
                             <User className="w-3.5 h-3.5 text-slate-400" />
                             <span>{log.user_name}</span>
                           </div>
@@ -152,8 +147,8 @@ export default function AuditLogsPage() {
                           </span>
                         </td>
                         <td className="px-5 py-3.5 font-mono">
-                          <span className="text-slate-400">{log.entity}: </span>
-                          <span className="text-cyan-400 font-semibold">{log.entity_id}</span>
+                          <span className="text-slate-400 light:text-slate-600">{log.entity}: </span>
+                          <span className="text-cyan-400 light:text-cyan-700 font-semibold">{log.entity_id}</span>
                         </td>
                         <td className="px-5 py-3.5 max-w-md">
                           <pre className="text-[11px] font-mono bg-slate-900/60 p-1.5 rounded border border-slate-800/60 overflow-x-auto text-slate-300 light:bg-slate-100 light:border-slate-300 light:text-slate-800">

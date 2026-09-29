@@ -6,7 +6,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { useData } from "@/context/data-context";
 import { useAuth } from "@/context/auth-context";
 import { MachineModal } from "@/components/machines/machine-modal";
-import { Machine, MachineStatus } from "@/types";
+import { Machine } from "@/types";
 import {
   Cpu,
   Plus,
@@ -15,10 +15,7 @@ import {
   Edit2,
   Trash2,
   History,
-  AlertTriangle,
   MapPin,
-  Calendar,
-  Layers,
   CheckCircle,
 } from "lucide-react";
 import { getMachineStatusBadge, formatDateOnly } from "@/lib/utils";
@@ -81,10 +78,10 @@ export default function MachinesPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-slate-800 light:border-slate-200">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2 light:text-slate-900">
-              <Cpu className="w-5 h-5 text-cyan-400" />
+              <Cpu className="w-5 h-5 text-cyan-400 light:text-cyan-600" />
               <span>Machine Master (ทะเบียนเครื่องจักร)</span>
             </h1>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-400 light:text-slate-600 mt-1">
               จัดการข้อมูลเครื่องจักรหลัก ตรวจสอบสถานะการทำงาน และประวัติการซ่อมบำรุง
             </p>
           </div>
@@ -105,8 +102,8 @@ export default function MachinesPage() {
           <div
             className={`p-3 rounded-lg text-xs flex items-center gap-2 ${
               feedbackMsg.type === "success"
-                ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-300"
-                : "bg-rose-500/10 border border-rose-500/30 text-rose-300"
+                ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 light:bg-emerald-50 light:text-emerald-800 light:border-emerald-300"
+                : "bg-rose-500/10 border border-rose-500/30 text-rose-300 light:bg-rose-50 light:text-rose-800 light:border-rose-300"
             }`}
           >
             <CheckCircle className="w-4 h-4" />
@@ -117,7 +114,7 @@ export default function MachinesPage() {
         {/* 3.5 Multi-Condition Search & Filter Bar */}
         <div className="bg-[#121824] border border-slate-800 rounded-xl p-4 shadow-md light:bg-white light:border-slate-200">
           <div className="flex items-center gap-2 mb-3 text-xs font-semibold text-slate-300 light:text-slate-700">
-            <Filter className="w-3.5 h-3.5 text-cyan-400" />
+            <Filter className="w-3.5 h-3.5 text-cyan-400 light:text-cyan-600" />
             <span>Search & Multi-Filter (ค้นหาและกรองข้อมูลอย่างน้อย 2 เงื่อนไข)</span>
           </div>
 
@@ -130,7 +127,7 @@ export default function MachinesPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="ค้นหา Machine ID, ชื่อ, หรือประเภท..."
-                className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors light:bg-slate-50 light:text-slate-900"
+                className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors light:bg-slate-50 light:border-slate-300 light:text-slate-900"
               />
             </div>
 
@@ -139,7 +136,7 @@ export default function MachinesPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:text-slate-900 font-mono"
+                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:border-slate-300 light:text-slate-900 font-mono"
               >
                 <option value="ALL">สถานะทั้งหมด (All Status)</option>
                 <option value="Running">🟢 Running (กำลังทำงาน)</option>
@@ -154,7 +151,7 @@ export default function MachinesPage() {
               <select
                 value={locationFilter}
                 onChange={(e) => setLocationFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:text-slate-900 font-mono"
+                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:border-slate-300 light:text-slate-900 font-mono"
               >
                 <option value="ALL">ตำแหน่งทั้งหมด (All Locations)</option>
                 {uniqueLocations.map((loc) => (
@@ -167,9 +164,9 @@ export default function MachinesPage() {
           </div>
         </div>
 
-        {/* Machine Table / Cards */}
+        {/* Machine Table */}
         <div className="bg-[#121824] border border-slate-800 rounded-xl shadow-lg overflow-hidden light:bg-white light:border-slate-200">
-          <div className="p-4 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 light:border-slate-200 font-mono">
+          <div className="p-4 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 light:text-slate-600 light:border-slate-200 font-mono">
             <span>ผลการค้นหา: {filteredMachines.length} เครื่องจักร</span>
             <span>แสดงตามทะเบียนเครื่องจักร</span>
           </div>
@@ -181,7 +178,7 @@ export default function MachinesPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-900/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800 light:bg-slate-50 light:border-slate-200">
+                <thead className="bg-slate-900/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800 light:bg-slate-100 light:text-slate-700 light:border-slate-200">
                   <tr>
                     <th className="px-5 py-3 font-semibold">Machine ID</th>
                     <th className="px-5 py-3 font-semibold">Name & Type</th>
@@ -200,14 +197,14 @@ export default function MachinesPage() {
                         className="hover:bg-slate-800/30 transition-colors light:hover:bg-slate-50"
                       >
                         {/* Machine ID */}
-                        <td className="px-5 py-3.5 font-mono font-bold text-cyan-400">
+                        <td className="px-5 py-3.5 font-mono font-bold text-cyan-400 light:text-cyan-700">
                           {m.machine_id}
                         </td>
 
                         {/* Name & Type */}
                         <td className="px-5 py-3.5">
                           <div className="font-semibold text-white light:text-slate-900">{m.name}</div>
-                          <div className="text-[11px] text-slate-400">{m.type}</div>
+                          <div className="text-[11px] text-slate-400 light:text-slate-500">{m.type}</div>
                         </td>
 
                         {/* Location */}
@@ -229,7 +226,7 @@ export default function MachinesPage() {
                         </td>
 
                         {/* Installed Date */}
-                        <td className="px-5 py-3.5 font-mono text-slate-400">
+                        <td className="px-5 py-3.5 font-mono text-slate-400 light:text-slate-600">
                           {formatDateOnly(m.installed_at)}
                         </td>
 
@@ -238,10 +235,10 @@ export default function MachinesPage() {
                           {/* Machine History (Bonus & CR) */}
                           <Link
                             href={`/machines/${m.id}`}
-                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors text-[11px]"
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors text-[11px] light:bg-slate-100 light:text-slate-700 light:border-slate-300 light:hover:bg-slate-200"
                             title="ดูประวัติไทม์ไลน์เครื่องจักร (Machine History)"
                           >
-                            <History className="w-3.5 h-3.5 text-cyan-400" />
+                            <History className="w-3.5 h-3.5 text-cyan-400 light:text-cyan-700" />
                             <span>History</span>
                           </Link>
 
@@ -250,14 +247,14 @@ export default function MachinesPage() {
                             <>
                               <button
                                 onClick={() => handleOpenEdit(m)}
-                                className="p-1.5 rounded hover:bg-slate-800 text-slate-400 hover:text-amber-400 transition-colors"
+                                className="p-1.5 rounded hover:bg-slate-800 text-slate-400 hover:text-amber-400 transition-colors light:text-slate-500 light:hover:bg-slate-100 light:hover:text-amber-600"
                                 title="แก้ไขเครื่องจักร (Edit)"
                               >
                                 <Edit2 className="w-3.5 h-3.5" />
                               </button>
                               <button
                                 onClick={() => handleDelete(m.id, m.machine_id)}
-                                className="p-1.5 rounded hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 transition-colors"
+                                className="p-1.5 rounded hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 transition-colors light:text-slate-500 light:hover:bg-rose-50 light:hover:text-rose-600"
                                 title="ลบเครื่องจักร (Delete)"
                               >
                                 <Trash2 className="w-3.5 h-3.5" />

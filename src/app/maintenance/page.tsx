@@ -6,18 +6,15 @@ import { AppShell } from "@/components/layout/app-shell";
 import { useData } from "@/context/data-context";
 import { useAuth } from "@/context/auth-context";
 import { MaintenanceModal } from "@/components/maintenance/maintenance-modal";
-import { MaintenanceRecord, MaintenanceStatus, MaintenanceType } from "@/types";
+import { MaintenanceRecord, MaintenanceStatus } from "@/types";
 import {
   Wrench,
   Plus,
   Search,
   Filter,
   CheckCircle2,
-  Clock,
   Edit2,
   Trash2,
-  Cpu,
-  Calendar,
   Package,
   User,
 } from "lucide-react";
@@ -95,10 +92,10 @@ export default function MaintenancePage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-slate-800 light:border-slate-200">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2 light:text-slate-900">
-              <Wrench className="w-5 h-5 text-amber-400" />
+              <Wrench className="w-5 h-5 text-amber-400 light:text-amber-600" />
               <span>Maintenance Work Orders (ระบบงานซ่อมบำรุง)</span>
             </h1>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-400 light:text-slate-600 mt-1">
               จัดการใบสั่งซ่อมบำรุงเชิงป้องกัน (PM), ซ่อมด่วน (BM), รองรับสถานะรอเบิกอะไหล่ (Waiting Part)
             </p>
           </div>
@@ -119,8 +116,8 @@ export default function MaintenancePage() {
           <div
             className={`p-3 rounded-lg text-xs flex items-center gap-2 ${
               feedbackMsg.type === "success"
-                ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-300"
-                : "bg-rose-500/10 border border-rose-500/30 text-rose-300"
+                ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 light:bg-emerald-50 light:text-emerald-800 light:border-emerald-300"
+                : "bg-rose-500/10 border border-rose-500/30 text-rose-300 light:bg-rose-50 light:text-rose-800 light:border-rose-300"
             }`}
           >
             <CheckCircle2 className="w-4 h-4" />
@@ -131,7 +128,7 @@ export default function MaintenancePage() {
         {/* 3.5 & Change Request: Multi-Condition Search & Filters */}
         <div className="bg-[#121824] border border-slate-800 rounded-xl p-4 shadow-md light:bg-white light:border-slate-200">
           <div className="flex items-center gap-2 mb-3 text-xs font-semibold text-slate-300 light:text-slate-700">
-            <Filter className="w-3.5 h-3.5 text-amber-400" />
+            <Filter className="w-3.5 h-3.5 text-amber-400 light:text-amber-600" />
             <span>Maintenance Multi-Filter (ค้นหาและกรองหลายเงื่อนไขรวมถึงช่วงวันที่ - CR)</span>
           </div>
 
@@ -144,7 +141,7 @@ export default function MaintenancePage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="ค้นหาปัญหา, ช่างผู้รับผิดชอบ..."
-                className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors light:bg-slate-50 light:text-slate-900"
+                className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors light:bg-slate-50 light:border-slate-300 light:text-slate-900"
               />
             </div>
 
@@ -153,7 +150,7 @@ export default function MaintenancePage() {
               <select
                 value={machineFilter}
                 onChange={(e) => setMachineFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:text-slate-900 font-mono"
+                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:border-slate-300 light:text-slate-900 font-mono"
               >
                 <option value="ALL">เครื่องจักรทั้งหมด (All Machines)</option>
                 {machines.map((m) => (
@@ -169,7 +166,7 @@ export default function MaintenancePage() {
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:text-slate-900 font-mono"
+                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:border-slate-300 light:text-slate-900 font-mono"
               >
                 <option value="ALL">ประเภทงานทั้งหมด (All Types)</option>
                 <option value="Preventive (PM)">Preventive (PM)</option>
@@ -178,12 +175,12 @@ export default function MaintenancePage() {
               </select>
             </div>
 
-            {/* Condition 4: Status Filter (including Waiting Part CR requirement!) */}
+            {/* Condition 4: Status Filter */}
             <div>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:text-slate-900 font-bold"
+                className="w-full px-3 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 light:bg-slate-50 light:border-slate-300 light:text-slate-900 font-bold"
               >
                 <option value="ALL">สถานะทั้งหมด (All Status)</option>
                 <option value="Pending">Pending (รอดำเนินการ)</option>
@@ -193,19 +190,19 @@ export default function MaintenancePage() {
               </select>
             </div>
 
-            {/* Condition 5: Date Filter (Change Request requirement!) */}
+            {/* Condition 5: Date Filter */}
             <div className="flex items-center gap-1">
               <input
                 type="date"
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
-                className="w-full px-2.5 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 font-mono light:bg-slate-50 light:text-slate-900"
+                className="w-full px-2.5 py-2 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500 font-mono light:bg-slate-50 light:border-slate-300 light:text-slate-900"
                 title="Filter by Scheduled Date"
               />
               {dateFilter && (
                 <button
                   onClick={() => setDateFilter("")}
-                  className="px-2 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-2 py-2 text-xs text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900"
                   title="Clear Date"
                 >
                   ✕
@@ -217,7 +214,7 @@ export default function MaintenancePage() {
 
         {/* Maintenance Table */}
         <div className="bg-[#121824] border border-slate-800 rounded-xl shadow-lg overflow-hidden light:bg-white light:border-slate-200">
-          <div className="p-4 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 light:border-slate-200 font-mono">
+          <div className="p-4 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 light:text-slate-600 light:border-slate-200 font-mono">
             <span>แสดง: {filteredRecords.length} ใบสั่งซ่อมบำรุง</span>
             <span>บันทึกและติดตามสถานะงานซ่อม</span>
           </div>
@@ -229,7 +226,7 @@ export default function MaintenancePage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-900/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800 light:bg-slate-50 light:border-slate-200">
+                <thead className="bg-slate-900/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800 light:bg-slate-100 light:text-slate-700 light:border-slate-200">
                   <tr>
                     <th className="px-5 py-3 font-semibold">Machine</th>
                     <th className="px-5 py-3 font-semibold">Type</th>
@@ -254,12 +251,12 @@ export default function MaintenancePage() {
                         <td className="px-5 py-3.5">
                           <Link
                             href={`/machines/${m?.id}`}
-                            className="font-mono text-cyan-400 hover:underline font-bold text-xs flex items-center gap-1"
+                            className="font-mono text-cyan-400 hover:underline font-bold text-xs flex items-center gap-1 light:text-cyan-700"
                             title="ดูประวัติเครื่องจักร"
                           >
                             <span>{m?.machine_id}</span>
                           </Link>
-                          <div className="text-[11px] text-slate-400 truncate max-w-[130px]">
+                          <div className="text-[11px] text-slate-400 light:text-slate-600 truncate max-w-[130px]">
                             {m?.name}
                           </div>
                         </td>
@@ -269,10 +266,10 @@ export default function MaintenancePage() {
                           <span
                             className={`px-2 py-0.5 rounded text-[10px] font-mono border font-medium ${
                               maint.maintenance_type === "Preventive (PM)"
-                                ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                                ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 light:bg-emerald-50 light:text-emerald-800 light:border-emerald-300"
                                 : maint.maintenance_type === "Breakdown (BM)"
-                                ? "bg-rose-500/10 text-rose-400 border-rose-500/30"
-                                : "bg-blue-500/10 text-blue-400 border-blue-500/30"
+                                ? "bg-rose-500/10 text-rose-400 border-rose-500/30 light:bg-rose-50 light:text-rose-800 light:border-rose-300"
+                                : "bg-blue-500/10 text-blue-400 border-blue-500/30 light:bg-blue-50 light:text-blue-800 light:border-blue-300"
                             }`}
                           >
                             {maint.maintenance_type}
@@ -285,8 +282,8 @@ export default function MaintenancePage() {
                             {maint.problem}
                           </div>
                           {maint.action_taken && (
-                            <div className="text-[11px] text-slate-400 mt-1 bg-slate-900/60 p-1.5 rounded border border-slate-800/60">
-                              <span className="text-cyan-400 font-mono">Action:</span>{" "}
+                            <div className="text-[11px] text-slate-400 light:text-slate-700 mt-1 bg-slate-900/60 light:bg-slate-100 p-1.5 rounded border border-slate-800/60 light:border-slate-200">
+                              <span className="text-cyan-400 light:text-cyan-700 font-mono">Action:</span>{" "}
                               {maint.action_taken}
                             </div>
                           )}
@@ -301,10 +298,10 @@ export default function MaintenancePage() {
                         </td>
 
                         {/* Date */}
-                        <td className="px-5 py-3.5 font-mono text-slate-400">
+                        <td className="px-5 py-3.5 font-mono text-slate-400 light:text-slate-600">
                           <div>Plan: {formatDateOnly(maint.scheduled_date)}</div>
                           {maint.completed_date && (
-                            <div className="text-[10px] text-emerald-400">
+                            <div className="text-[10px] text-emerald-400 light:text-emerald-700">
                               Done: {formatDateOnly(maint.completed_date)}
                             </div>
                           )}
@@ -327,7 +324,7 @@ export default function MaintenancePage() {
                           {canEditMaintenance && maint.status !== "Completed" && (
                             <button
                               onClick={() => handleQuickStatusChange(maint, "Completed")}
-                              className="px-2 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-semibold transition-colors"
+                              className="px-2 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-semibold transition-colors light:bg-emerald-50 light:text-emerald-800 light:border-emerald-300"
                               title="เปลี่ยนเป็น Completed"
                             >
                               Complete
@@ -337,7 +334,7 @@ export default function MaintenancePage() {
                           {canEditMaintenance && (
                             <button
                               onClick={() => handleOpenEdit(maint)}
-                              className="p-1.5 rounded hover:bg-slate-800 text-slate-400 hover:text-amber-400 transition-colors"
+                              className="p-1.5 rounded hover:bg-slate-800 text-slate-400 hover:text-amber-400 transition-colors light:text-slate-500 light:hover:bg-slate-100 light:hover:text-amber-600"
                               title="แก้ไขใบสั่งซ่อม"
                             >
                               <Edit2 className="w-3.5 h-3.5" />
@@ -347,7 +344,7 @@ export default function MaintenancePage() {
                           {isAdmin && (
                             <button
                               onClick={() => handleDelete(maint.id)}
-                              className="p-1.5 rounded hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 transition-colors"
+                              className="p-1.5 rounded hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 transition-colors light:text-slate-500 light:hover:bg-rose-50 light:hover:text-rose-600"
                               title="ลบใบสั่งซ่อม"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
