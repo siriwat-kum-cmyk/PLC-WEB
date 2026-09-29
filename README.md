@@ -20,6 +20,9 @@
 4. **Maintenance Optimization**: รองรับกระบวนการขอเบิกอะไหล่ (Waiting Part Change Request) เพื่อความคล่องตัวในการจัดซื้อและควบคุมสต็อกอะไหล่
 5. **Modern Engineering Standards**: Zero-defect TypeScript, ESLint, Automated Testing และ GitHub Actions CI/CD Pipeline
 
+> 🌐 **Live Vercel Deployment URL:** [https://plc-31098zw6p-test11-fdee.vercel.app?_vercel_share=UOpiasrDPiDlYi7neyacBhJOHWgBnEqb](https://plc-31098zw6p-test11-fdee.vercel.app?_vercel_share=UOpiasrDPiDlYi7neyacBhJOHWgBnEqb)  
+> 🔗 **GitHub Repository:** [https://github.com/siriwat-kum-cmyk/PLC-WEB](https://github.com/siriwat-kum-cmyk/PLC-WEB)
+
 ---
 
 ## 3. System Architecture & Dual-Mode Flow

@@ -1,9 +1,11 @@
-Vercel Deployment URL:
-https://plc-web-production.vercel.app
+Vercel Live Deployment URL (พร้อม Share Token สำหรับอาจารย์เข้าตรวจได้ทันที):
+https://plc-31098zw6p-test11-fdee.vercel.app?_vercel_share=UOpiasrDPiDlYi7neyacBhJOHWgBnEqb
 
-Repository Source: https://github.com/siriwat-kum-cmyk/PLC-WEB
-Build Status: Next.js 15.5.26 Production Ready (0 Errors)
-Demo Accounts:
-- Admin: admin@automation.local / admin123
-- Tech: tech@automation.local / tech123
-- Viewer: viewer@automation.local / viewer123
+GitHub Source: https://github.com/siriwat-kum-cmyk/PLC-WEB
+Framework: Next.js 15.5.26 (Patched CVE-2025-66478)
+Status: Online & Operational (0 Errors)
+
+Demo Accounts for Testing:
+1. Admin: admin@automation.local / admin123
+2. Technician: tech@automation.local / tech123
+3. Viewer: viewer@automation.local / viewer123

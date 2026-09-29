@@ -143,8 +143,10 @@ const manualHtml = `<!DOCTYPE html>
     
     <div style="margin: 30px auto; max-width: 480px; text-align: left; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px; font-size: 10pt;">
       <p><strong>วิชา:</strong> การเขียนโปรแกรมในระบบอัตโนมัติ (Programming in Automation Systems)</p>
-      <p><strong>เทคโนโลยีหลัก:</strong> Next.js 15, TypeScript, Tailwind CSS, Supabase PostgreSQL, Recharts</p>
-      <p><strong>เวอร์ชันระบบ:</strong> v2.4.0 Production Build</p>
+      <p><strong>เทคโนโลยีหลัก:</strong> Next.js 15.5.26, TypeScript, Tailwind CSS, Supabase, Recharts</p>
+      <p><strong>Vercel Live URL:</strong> <a href="https://plc-31098zw6p-test11-fdee.vercel.app?_vercel_share=UOpiasrDPiDlYi7neyacBhJOHWgBnEqb" style="color: #0284c7; text-decoration: underline;">https://plc-31098zw6p-test11-fdee.vercel.app</a></p>
+      <p><strong>GitHub Repository:</strong> <a href="https://github.com/siriwat-kum-cmyk/PLC-WEB" style="color: #0284c7; text-decoration: underline;">https://github.com/siriwat-kum-cmyk/PLC-WEB</a></p>
+      <p><strong>เวอร์ชันระบบ:</strong> v2.4.0 Production Build (Live & Verified)</p>
       <p><strong>วันที่จัดทำ:</strong> กันยายน 2026</p>
     </div>
   </div>
@@ -471,21 +473,25 @@ const presentationHtml = `<!DOCTYPE html>
         ระบบบริหารจัดการเหตุการณ์แจ้งเตือนและงานซ่อมบำรุงรักษาเครื่องจักรอุตสาหกรรม
       </p>
       
-      <div style="display: inline-flex; gap: 30px; background: rgba(15, 23, 42, 0.8); border: 1px solid #334155; padding: 14px 28px; border-radius: 12px; font-size: 10.5pt; text-align: left;">
+      <div style="display: inline-flex; gap: 24px; background: rgba(15, 23, 42, 0.8); border: 1px solid #334155; padding: 12px 24px; border-radius: 12px; font-size: 10pt; text-align: left;">
         <div>
-          <span style="color: #64748b; font-size: 9pt; display: block;">วิชา (COURSE)</span>
+          <span style="color: #64748b; font-size: 8.5pt; display: block;">วิชา (COURSE)</span>
           <span style="color: #e2e8f0; font-weight: 600;">Programming in Automation Systems</span>
         </div>
-        <div style="border-left: 1px solid #334155; padding-left: 30px;">
-          <span style="color: #64748b; font-size: 9pt; display: block;">เทคโนโลยี (TECH STACK)</span>
-          <span style="color: #38bdf8; font-family: 'JetBrains Mono', monospace; font-weight: 600;">Next.js 15 • Supabase • Recharts</span>
+        <div style="border-left: 1px solid #334155; padding-left: 20px;">
+          <span style="color: #64748b; font-size: 8.5pt; display: block;">VERCEL LIVE URL</span>
+          <span style="color: #38bdf8; font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">plc-31098zw6p-test11-fdee.vercel.app</span>
+        </div>
+        <div style="border-left: 1px solid #334155; padding-left: 20px;">
+          <span style="color: #64748b; font-size: 8.5pt; display: block;">GITHUB REPO</span>
+          <span style="color: #38bdf8; font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">github.com/siriwat-kum-cmyk/PLC-WEB</span>
         </div>
       </div>
     </div>
     
-    <div class="slide-footer" style="border: none; margin-top: 30px;">
+    <div class="slide-footer" style="border: none; margin-top: 24px;">
+      <span>Vercel Live: https://plc-31098zw6p-test11-fdee.vercel.app</span>
       <span>Autonomous Engineering Project</span>
-      <span>Department of Automation Engineering</span>
     </div>
   </div>
 

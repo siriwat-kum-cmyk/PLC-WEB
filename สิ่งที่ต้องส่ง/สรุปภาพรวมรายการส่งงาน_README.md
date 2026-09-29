@@ -4,6 +4,7 @@
 > **ผู้จัดทำ:** นักศึกษา / ทีมพัฒนาวิศวกรรมระบบอัตโนมัติ  
 > **วิชา:** การเขียนโปรแกรมในระบบอัตโนมัติ (Programming in Automation Systems)  
 > **Repository:** [https://github.com/siriwat-kum-cmyk/PLC-WEB](https://github.com/siriwat-kum-cmyk/PLC-WEB)  
+> **Vercel Live URL:** [https://plc-31098zw6p-test11-fdee.vercel.app?_vercel_share=UOpiasrDPiDlYi7neyacBhJOHWgBnEqb](https://plc-31098zw6p-test11-fdee.vercel.app?_vercel_share=UOpiasrDPiDlYi7neyacBhJOHWgBnEqb)  
 > **โฟลเดอร์นี้รวบรวมไฟล์และเอกสารสำคัญครบถ้วนทั้ง 6 รายการตามข้อกำหนด พร้อมเอกสารคู่มือ PDF**
 
 ---
