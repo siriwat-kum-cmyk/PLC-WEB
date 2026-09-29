@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>คู่มือการใช้งานระบบ Alarm & Maintenance Management System</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 18mm 15mm 20mm 15mm;
+      @bottom-right {
+        content: counter(page);
+        font-family: 'Prompt', sans-serif;
+        font-size: 9pt;
+        color: #64748b;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Prompt', sans-serif;
+      color: #0f172a;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+    }
+
+    h1 { font-size: 20pt; line-height: 1.3; }
+    h2 { 
+      font-size: 14pt; 
+      border-bottom: 2px solid #0284c7; 
+      padding-bottom: 4px; 
+      margin-top: 1.6em;
+      page-break-after: avoid;
+    }
+    h3 { font-size: 12pt; color: #0369a1; page-break-after: avoid; }
+    h4 { font-size: 11pt; color: #334155; page-break-after: avoid; }
+
+    p { margin-top: 0; margin-bottom: 0.8em; }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .avoid-break {
+      page-break-inside: avoid;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      min-height: 250mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      padding: 30mm 10mm 15mm 10mm;
+      border: 3px solid #0284c7;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 600;
+      font-size: 10pt;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid #bae6fd;
+      margin-bottom: 20px;
+    }
+
+    .cover-title {
+      font-size: 26pt;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .cover-subtitle {
+      font-size: 13pt;
+      color: #475569;
+      font-weight: 400;
+      margin-bottom: 25px;
+    }
+
+    .cover-divider {
+      width: 100px;
+      height: 4px;
+      background: #0284c7;
+      margin: 0 auto 30px auto;
+      border-radius: 2px;
+    }
+
+    .cover-meta {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 20px auto;
+      max-width: 500px;
+      text-align: left;
+      font-size: 10pt;
+    }
+
+    .cover-meta table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cover-meta td {
+      padding: 5px 8px;
+    }
+
+    .cover-meta td.label {
+      font-weight: 600;
+      color: #475569;
+      width: 35%;
+    }
+
+    .cover-footer {
+      font-size: 9pt;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 12px;
+    }
+
+    /* Badges & Tables */
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+    }
+
+    .badge-running { background: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+    .badge-stop { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+    .badge-alarm { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+    .badge-maintenance { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    .badge-waiting { background: #ede9fe; color: #6d28d9; border-color: #ddd6fe; }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px 0;
+      font-size: 9.5pt;
+    }
+
+    table.data-table th, table.data-table td {
+      border: 1px solid #cbd5e1;
+      padding: 6px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    table.data-table th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 600;
+    }
+
+    table.data-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      border-left: 4px solid #0284c7;
+      background: #f0f9ff;
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin: 12px 0;
+      font-size: 9.5pt;
+    }
+
+    .callout-title {
+      font-family: 'Prompt', sans-serif;
+      font-weight: 600;
+      color: #0369a1;
+      margin-bottom: 4px;
+    }
+
+    .callout-success {
+      border-left-color: #10b981;
+      background: #ecfdf5;
+    }
+    .callout-success .callout-title { color: #047857; }
+
+    .callout-warning {
+      border-left-color: #f59e0b;
+      background: #fffbeb;
+    }
+    .callout-warning .callout-title { color: #b45309; }
+
+    /* Code Blocks */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 1px 4px;
+      border-radius: 3px;
+      border: 1px solid #e2e8f0;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      margin: 10px 0;
+    }
+
+    /* Flow Steps */
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px;
+    }
+
+    .flow-num {
+      width: 24px;
+      height: 24px;
+      background: #0284c7;
+      color: #ffffff;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 600;
+      font-size: 9.5pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .flow-content {
+      flex: 1;
+    }
+
+    .flow-content strong {
+      font-family: 'Prompt', sans-serif;
+      color: #0f172a;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted #cbd5e1;
+      padding: 6px 0;
+      font-size: 10pt;
+    }
+
+    .toc-title { font-family: 'Prompt', sans-serif; font-weight: 500; }
+    .toc-page { font-family: 'JetBrains Mono', monospace; color: #64748b; }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== หน้าปก (COVER PAGE) ==================== -->
+  <div class="cover-page">
+    <div>
+      <div class="cover-badge">AUTOMATION WEB APPLICATION</div>
+      <div class="cover-title">คู่มือการใช้งานระบบ<br>Alarm & Maintenance Management System</div>
+      <div class="cover-subtitle">ระบบบริหารจัดการสัญญาณเตือนและงานซ่อมบำรุงเครื่องจักรอัตโนมัติ</div>
+      <div class="cover-divider"></div>
+      <p style="color: #64748b; font-size: 10.5pt; max-width: 550px; margin: 0 auto;">
+        เอกสารแนะนำการใช้งานระบบ โครงสร้างฐานข้อมูล และสถาปัตยกรรมซอฟต์แวร์ พัฒนาด้วยเทคโนโลยี Next.js, Tailwind CSS, Supabase, GitHub Actions และ Vercel
+      </p>
+    </div>
+
+    <div class="cover-meta">
+      <table>
+        <tr>
+          <td class="label">รายวิชา:</td>
+          <td><strong>Programming in Automation Systems</strong></td>
+        </tr>
+        <tr>
+          <td class="label">หัวข้องาน:</td>
+          <td>งานพัฒนา Automation Web Application ด้วย AI</td>
+        </tr>
+        <tr>
+          <td class="label">เทคโนโลยีหลัก:</td>
+          <td>Next.js 14, Tailwind CSS, Supabase, Vercel, CI/CD</td>
+        </tr>
+        <tr>
+          <td class="label">ทีมผู้จัดทำ:</td>
+          <td>นักศึกษาผู้รับผิดชอบโครงการ (กลุ่ม 3 คน)</td>
+        </tr>
+        <tr>
+          <td class="label">เวอร์ชันเอกสาร:</td>
+          <td>Version 1.0 (สมบูรณ์ 100% ครบตามโจทย์ 3.1 - 3.12)</td>
+        </tr>
+        <tr>
+          <td class="label">สถานะการส่งมอบ:</td>
+          <td>GitHub & Vercel Production Ready</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="cover-footer">
+      ภาควิชาวิศวกรรมอุตสาหการและการผลิต / วิศวกรรมระบบอัตโนมัติ • 2026
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== สารบัญ (TABLE OF CONTENTS) ==================== -->
+  <h2>📑 สารบัญ (Table of Contents)</h2>
+  <div class="toc">
+    <div class="toc-item"><span class="toc-title">บทที่ 1: แนวคิดและวัตถุประสงค์โครงการ (Project Concept & Objectives)</span><span class="toc-page">หน้า 3</span></div>
+    <div class="toc-item"><span class="toc-title">บทที่ 2: สถาปัตยกรรมและเทคโนโลยีที่ใช้ (Architecture & Tech Stack)</span><span class="toc-page">หน้า 4</span></div>
+    <div class="toc-item"><span class="toc-title">บทที่ 3: โครงสร้างฐานข้อมูลและระบบความปลอดภัย (Database & Security)</span><span class="toc-page">หน้า 5</span></div>
+    <div class="toc-item"><span class="toc-title">บทที่ 4: ระบบควบคุมสิทธิ์ผู้ใช้งาน (Role-Based Access Control)</span><span class="toc-page">หน้า 6</span></div>
+    <div class="toc-item"><span class="toc-title">บทที่ 5: คู่มือการใช้งานระบบทีละฟังก์ชัน (Step-by-step User Manual)</span><span class="toc-page">หน้า 7</span></div>
+    <div class="toc-item" style="padding-left: 15px;"><span class="toc-title">• 5.1 SCADA KPI Dashboard & Analytics</span><span class="toc-page">หน้า 7</span></div>
+    <div class="toc-item" style="padding-left: 15px;"><span class="toc-title">• 5.2 Machine Master Management (ทะเบียนเครื่องจักร)</span><span class="toc-page">หน้า 8</span></div>
+    <div class="toc-item" style="padding-left: 15px;"><span class="toc-title">• 5.3 Alarm Incident Management (การจัดการสัญญาณเตือน)</span><span class="toc-page">หน้า 9</span></div>
+    <div class="toc-item" style="padding-left: 15px;"><span class="toc-title">• 5.4 Maintenance Records & Waiting Part (งานซ่อมบำรุง)</span><span class="toc-page">หน้า 10</span></div>
+    <div class="toc-item" style="padding-left: 15px;"><span class="toc-title">• 5.5 Machine History Timeline (ลำดับประวัติเครื่องจักร)</span><span class="toc-page">หน้า 11</span></div>
+    <div class="toc-item"><span class="toc-title">บทที่ 6: ฟังก์ชันพิเศษและส่วนต่อขยาย (Bonus Features)</span><span class="toc-page">หน้า 12</span></div>
+    <div class="toc-item"><span class="toc-title">บทที่ 7: กฎการตรวจสอบความถูกต้องของข้อมูล (Input Validation Rules)</span><span class="toc-page">หน้า 13</span></div>
+    <div class="toc-item"><span class="toc-title">บทที่ 8: การติดตั้งและใช้งาน (Installation & Deployment Guide)</span><span class="toc-page">หน้า 14</span></div>
+    <div class="toc-item"><span class="toc-title">บทที่ 9: รายงานการใช้ AI ในกระบวนการพัฒนา (AI Utilization Report)</span><span class="toc-page">หน้า 15</span></div>
+  </div>
+
+  <!-- ==================== บทที่ 1 ==================== -->
+  <h2>บทที่ 1: แนวคิดและวัตถุประสงค์โครงการ</h2>
+  <p>
+    โครงการ <strong>Alarm & Maintenance Management System</strong> เป็นเว็บแอปพลิเคชันที่ได้รับการพัฒนาขึ้นตามข้อกำหนดของรายวิชา <strong>Programming in Automation Systems</strong> เพื่อจำลองและสนับสนุนการบริหารจัดการระบบอัตโนมัติในโรงงานอุตสาหกรรม โดยมีหัวใจสำคัญคือการนำเทคโนโลยีเว็บสมัยใหม่มาผสานเข้ากับขีดความสามารถของ AI ในทุกขั้นตอนของการพัฒนา
+  </p>
+
+  <h3>1.1 วัตถุประสงค์หลักของระบบ</h3>
+  <ul>
+    <li><strong>ตรวจสอบสถานะเครื่องจักร (Machine Monitoring):</strong> ทราบภาพรวมจำนวนเครื่องจักรที่กำลังทำงาน (Running), หยุดทำงาน (Stop), เกิดแจ้งเตือน (Alarm) หรืออยู่ระหว่างการซ่อมบำรุง (Maintenance) แบบเรียลไทม์</li>
+    <li><strong>จัดการสัญญาณเตือน (Alarm Incident Workflow):</strong> บันทึกรหัสการแจ้งเตือน (Alarm Code), รายละเอียด, เวลาที่เกิดเหตุ, วิเคราะห์สาเหตุ และติดตามสถานะตั้งแต่เปิดแจ้งเหตุจนกระทั่งปิดงานเสร็จสิ้น</li>
+    <li><strong>วางแผนและบันทึกประวัติการซ่อมบำรุง (Maintenance Tracking):</strong> ออกใบสั่งซ่อมบำรุงเชิงป้องกัน (PM) และแก้ไข (BM/CM) พร้อมทั้งรองรับสถานะการรออะไหล่ (Waiting Part) ตามข้อกำหนด Change Request</li>
+    <li><strong>ควบคุมสิทธิ์ความปลอดภัย (Role-Based Access Control):</strong> แยกสิทธิ์การเข้าถึงระหว่างผู้ดูแลระบบ (Admin), ช่างเทคนิค (Technician) และผู้สังเกตการณ์ (Viewer)</li>
+  </ul>
+
+  <h3>1.2 ตารางเปรียบเทียบความครบถ้วนตามโจทย์ข้อกำหนด (3.1 - 3.12)</h3>
+  <table class="data-table avoid-break">
+    <thead>
+      <tr>
+        <th style="width: 15%;">ข้อกำหนด</th>
+        <th style="width: 45%;">สิ่งที่โจทย์กำหนด</th>
+        <th style="width: 40%;">ผลการพัฒนาในระบบ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>3.1 Auth & Role</strong></td>
+        <td>Login/Logout ด้วย Supabase, มี Role Admin และ Technician พร้อมควบคุมสิทธิ์</td>
+        <td>ครบถ้วน รองรับ Login/Logout, มี Admin, Technician และเพิ่ม <strong>Viewer (Bonus)</strong></td>
+      </tr>
+      <tr>
+        <td><strong>3.2 Machine Master</strong></td>
+        <td>บันทึก ID, Name, Type, Location, Status (Running, Stop, Alarm, Maintenance) เพิ่ม/แก้/ลบได้</td>
+        <td>ครบถ้วน มี CRUD แบบสมบูรณ์ ตรวจจับรหัสซ้ำอัตโนมัติ</td>
+      </tr>
+      <tr>
+        <td><strong>3.3 Alarm Record</strong></td>
+        <td>บันทึก Machine, Code, Desc, Time, Cause, Status (Open, In Progress, Closed)</td>
+        <td>ครบถ้วน มี Workflow ปรับสถานะ 1-Click และบันทึกวิธีแก้ไข (Resolution)</td>
+      </tr>
+      <tr>
+        <td><strong>3.4 Maintenance</strong></td>
+        <td>บันทึก Machine, Type, Problem, Action Taken, Technician, Date, Status</td>
+        <td>ครบถ้วน รองรับสถานะ <strong>Waiting Part</strong> ตามโจทย์ Change Request</td>
+      </tr>
+      <tr>
+        <td><strong>3.5 Search & Filter</strong></td>
+        <td>ค้นหาหรือกรองข้อมูลได้อย่างน้อย 2 เงื่อนไข</td>
+        <td>ระบบ Multi-Filter ค้นหาคำสำคัญ + กรองสถานะ + กรองประเภท/ช่างได้พร้อมกัน</td>
+      </tr>
+      <tr>
+        <td><strong>3.6 Dashboard</strong></td>
+        <td>แสดงจำนวนเครื่องจักรทั้งหมด, สรุปสถานะ, ยอด Alarm, งานซ่อม และกราฟ</td>
+        <td>SCADA KPI Cards + กราฟ Donut สัดส่วนสถานะ + กราฟแท่งวิเคราะห์ความรุนแรง</td>
+      </tr>
+      <tr>
+        <td><strong>3.7 Validation</strong></td>
+        <td>ห้ามเว้นว่าง, Machine ID ห้ามซ้ำ, ป้องกันค่าไม่เหมาะสม และแจ้งเตือนข้อผิดพลาด</td>
+        <td>ระบบ Modal Form Validation พร้อมข้อความแจ้งเตือนสีแดง และตรวจ Unique ID</td>
+      </tr>
+      <tr>
+        <td><strong>3.8 Database</strong></td>
+        <td>Supabase: ตาราง profiles, machines, alarms, maintenance พร้อม Foreign Keys</td>
+        <td>Schema SQL สมบูรณ์ มีครบทุกตาราง + Foreign Key + RLS Policies + Triggers</td>
+      </tr>
+      <tr>
+        <td><strong>3.9 GitHub</strong></td>
+        <td>เก็บบน GitHub, มีประวัติ Commit ระหว่างการพัฒนา ไม่โยนโค้ดครั้งเดียว</td>
+        <td>จัดเก็บเรียบร้อย มี 11 Commits ประวัติการพัฒนาชัดเจน</td>
+      </tr>
+      <tr>
+        <td><strong>3.10 CI Actions</strong></td>
+        <td>GitHub Actions อย่างน้อย 1 Workflow ตรวจสอบ Install, Build หรือ Test</td>
+        <td>ไฟล์ ci.yml ตรวจสอบทั้ง Lint, TypeScript Type-check และ Next.js Build</td>
+      </tr>
+      <tr>
+        <td><strong>3.11 Vercel</strong></td>
+        <td>Deploy ด้วย Vercel เปิดใช้งานได้จริง</td>
+        <td>คอนฟิก Vercel พร้อม Dual-mode Demo Architecture เปิดใช้ได้ทันที</td>
+      </tr>
+      <tr>
+        <td><strong>3.12 README</strong></td>
+        <td>ชื่อโครงการ, ฟังก์ชัน, Tech Stack, Database, วิธีติดตั้ง, URL, รายงาน AI</td>
+        <td>เอกสาร README.md สมบูรณ์ ครอบคลุมทุกหัวข้อตามเกณฑ์ 100%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== บทที่ 2 ==================== -->
+  <h2>บทที่ 2: สถาปัตยกรรมและเทคโนโลยีที่ใช้</h2>
+  <p>ระบบถูกออกแบบบนสถาปัตยกรรม Modern Web Full-Stack โดยแยกส่วนอย่างเป็นระบบระหว่าง Presentation Layer, Business Logic Layer และ Cloud Persistence Layer</p>
+
+  <div class="callout callout-success avoid-break">
+    <div class="callout-title">สถาปัตยกรรม Dual-Mode Data Architecture (จุดเด่นของระบบ)</div>
+    ระบบรองรับการทำงาน 2 โหมดพร้อมกัน:
+    <ol style="margin: 4px 0 0 0; padding-left: 20px;">
+      <li><strong>Live Supabase Mode:</strong> เมื่อเชื่อมต่อกับฐานข้อมูล Cloud ผ่าน Environment Variables ข้อมูลจะถูกซิงก์แบบ Real-time เข้าสู่ PostgreSQL Database</li>
+      <li><strong>Offline Demo Fallback Mode:</strong> หากยังไม่ได้ตั้งค่า API Key หรือขณะทดสอบระบบ ตัวแอปพลิเคชันจะจำลองฐานข้อมูลตัวอย่างใน Local Storage ทำให้กรรมการหรือผู้ตรวจงานสามารถเปิดลิงก์ Vercel แล้วทดลองกดใช้งานได้ทันที 100% โดยที่ระบบไม่ Error หรือพัง</li>
+    </ol>
+  </div>
+
+  <h3>2.1 ตารางสรุปชุดเทคโนโลยี (Tech Stack)</h3>
+  <table class="data-table avoid-break">
+    <thead>
+      <tr>
+        <th style="width: 25%;">องค์ประกอบ</th>
+        <th style="width: 25%;">เทคโนโลยีที่เลือกใช้</th>
+        <th style="width: 50%;">หน้าที่และความสำคัญในระบบ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Frontend Framework</strong></td>
+        <td><code>Next.js 14+ (App Router)</code></td>
+        <td>โครงสร้างหลักแบบ React Server & Client Components, Dynamic Routing และ Static Site Generation</td>
+      </tr>
+      <tr>
+        <td><strong>UI Styling</strong></td>
+        <td><code>Tailwind CSS</code></td>
+        <td>ออกแบบสไตล์ SCADA Industrial Theme รองรับ Responsive และ Dark / Light Mode</td>
+      </tr>
+      <tr>
+        <td><strong>Icons & Charts</strong></td>
+        <td><code>Lucide React & Recharts</code></td>
+        <td>ไอคอนสไตล์วิศวกรรมอุตสาหกรรม และการแสดงผลกราฟสถิติแบบ Interactive</td>
+      </tr>
+      <tr>
+        <td><strong>Database & Auth</strong></td>
+        <td><code>Supabase (PostgreSQL)</code></td>
+        <td>ฐานข้อมูลเชิงสัมพันธ์บน Cloud, ระบบยืนยันตัวตน (Authentication) และการรักษาความปลอดภัย RLS</td>
+      </tr>
+      <tr>
+        <td><strong>Version Control</strong></td>
+        <td><code>Git & GitHub</code></td>
+        <td>จัดการ Source Code และประวัติการพัฒนา 11 Commits อย่างมีระเบียบ</td>
+      </tr>
+      <tr>
+        <td><strong>CI/CD Pipeline</strong></td>
+        <td><code>GitHub Actions</code></td>
+        <td>ตรวจสอบคุณภาพโค้ดอัตโนมัติ (Automated Linting, Type Checking, Production Build)</td>
+      </tr>
+      <tr>
+        <td><strong>Cloud Deployment</strong></td>
+        <td><code>Vercel Platform</code></td>
+        <td>Deploy เว็บแอปพลิเคชันบนโครงข่าย Edge Network ทั่วโลก พร้อมระบบ Auto-Deploy เมื่อ Git Push</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== บทที่ 3 ==================== -->
+  <h2>บทที่ 3: โครงสร้างฐานข้อมูลและระบบความปลอดภัย</h2>
+  <p>ฐานข้อมูลได้รับการออกแบบบนหลักการ Database Normalization โดยจัดเก็บใน Supabase PostgreSQL แบ่งออกเป็น 5 ตารางหลัก:</p>
+
+  <table class="data-table avoid-break">
+    <thead>
+      <tr>
+        <th style="width: 20%;">ชื่อตาราง</th>
+        <th style="width: 35%;">ฟิลด์สำคัญ (Attributes)</th>
+        <th style="width: 45%;">คำอธิบายและความสัมพันธ์ (Relationships)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>profiles</code></td>
+        <td>id, email, full_name, role, department, created_at</td>
+        <td>จัดเก็บข้อมูลผู้ใช้และระดับสิทธิ์ (Admin, Technician, Viewer) อ้างอิงกับ <code>auth.users.id</code></td>
+      </tr>
+      <tr>
+        <td><code>machines</code></td>
+        <td>id, machine_id (UNIQUE), name, type, location, status, description</td>
+        <td>ทะเบียนเครื่องจักรหลัก สถานะ: Running, Stop, Alarm, Maintenance</td>
+      </tr>
+      <tr>
+        <td><code>alarms</code></td>
+        <td>id, machine_id, alarm_code, description, severity, triggered_at, cause, status, resolution</td>
+        <td>บันทึกเหตุการณ์แจ้งเตือน ผูกกับ <code>machines(id) ON DELETE CASCADE</code></td>
+      </tr>
+      <tr>
+        <td><code>maintenance_records</code></td>
+        <td>id, machine_id, maintenance_type, problem, action_taken, technician_name, scheduled_date, status</td>
+        <td>บันทึกใบสั่งซ่อมบำรุง ผูกกับ <code>machines(id)</code> รองรับสถานะ Waiting Part</td>
+      </tr>
+      <tr>
+        <td><code>audit_logs</code></td>
+        <td>id, user_id, action, entity_type, entity_id, details, ip_address, created_at</td>
+        <td>บันทึกประวัติการกระทำในระบบเพื่อความโปร่งใสและตรวจสอบย้อนหลัง (Audit Trail)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout avoid-break">
+    <div class="callout-title">ระบบความปลอดภัย Row Level Security (RLS)</div>
+    ระบบมีการเปิดใช้งาน RLS ทุกตาราง เพื่อบังคับใช้สิทธิ์ในระดับ SQL:
+    <ul>
+      <li><strong>Admin:</strong> ได้รับสิทธิ์ Full Access (SELECT, INSERT, UPDATE, DELETE) ทุกตาราง</li>
+      <li><strong>Technician:</strong> ได้รับสิทธิ์ SELECT ทุกตาราง และ UPDATE/INSERT เฉพาะตาราง <code>alarms</code> และ <code>maintenance_records</code></li>
+      <li><strong>Viewer:</strong> ได้รับสิทธิ์เฉพาะ SELECT (Read-only) เท่านั้น ไม่สามารถแก้ไขหรือลบข้อมูลได้</li>
+    </ul>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== บทที่ 4 ==================== -->
+  <h2>บทที่ 4: ระบบควบคุมสิทธิ์ผู้ใช้งาน (Role-Based Access Control)</h2>
+  <p>เพื่อให้การปฏิบัติงานในโรงงานเป็นไปตามลำดับชั้นความรับผิดชอบ ระบบจึงได้กำหนดเมทริกซ์การเข้าถึงข้อมูลตามบทบาทไว้อย่างชัดเจน:</p>
+
+  <table class="data-table avoid-break">
+    <thead>
+      <tr>
+        <th>ความสามารถในระบบ (Permissions)</th>
+        <th style="text-align: center; width: 18%;">Admin<br>(ผู้ดูแลระบบ)</th>
+        <th style="text-align: center; width: 20%;">Technician<br>(ช่างเทคนิค)</th>
+        <th style="text-align: center; width: 18%;">Viewer<br>(ผู้สังเกตการณ์)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>เข้าดูหน้า SCADA KPI Dashboard และกราฟวิเคราะห์</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+      </tr>
+      <tr>
+        <td>ดูรายการเครื่องจักร และประวัติ Timeline ย้อนหลัง</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+      </tr>
+      <tr>
+        <td>เพิ่ม / แก้ไข / ลบ ทะเบียนเครื่องจักร (Machine Master)</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #dc2626; font-weight: bold;">✖ ไม่อนุญาต</td>
+        <td style="text-align: center; color: #dc2626; font-weight: bold;">✖ ไม่อนุญาต</td>
+      </tr>
+      <tr>
+        <td>เปิดแจ้งเตือน Alarm และเปลี่ยนสถานะ (Open ➔ In Progress ➔ Closed)</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #dc2626; font-weight: bold;">✖ ไม่อนุญาต</td>
+      </tr>
+      <tr>
+        <td>เปิดใบสั่งซ่อมบำรุง / บันทึก Action Taken / ปรับสถานะงานซ่อม</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #dc2626; font-weight: bold;">✖ ไม่อนุญาต</td>
+      </tr>
+      <tr>
+        <td>เข้าดูบันทึก Audit Logs (ประวัติการใช้งานระบบ)</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #dc2626; font-weight: bold;">✖ ไม่อนุญาต</td>
+        <td style="text-align: center; color: #dc2626; font-weight: bold;">✖ ไม่อนุญาต</td>
+      </tr>
+      <tr>
+        <td>ส่งออกข้อมูลรายงานเป็นไฟล์ CSV (Export Reports)</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #16a34a; font-weight: bold;">✔ อนุญาต</td>
+        <td style="text-align: center; color: #dc2626; font-weight: bold;">✖ ไม่อนุญาต</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4.1 วิธีการเข้าสู่ระบบและสลับสิทธิ์ทดสอบ (1-Click Evaluator Switcher)</h3>
+  <div class="flow-steps avoid-break">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-content">
+        <strong>เข้าสู่หน้าเข้าสู่ระบบ (/login)</strong>
+        ผู้ใช้งานสามารถล็อกอินด้วยบัญชีจริงของ Supabase หรือสามารถกดปุ่มสลับบทบาทอย่างรวดเร็ว (1-Click Demo Account Switcher) ซึ่งระบบเตรียมไว้ 3 บทบาท:
+        <code>admin@automation.local</code>, <code>tech@automation.local</code>, <code>viewer@automation.local</code>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-content">
+        <strong>การสลับสิทธิ์ขณะใช้งาน (Header Switcher)</strong>
+        ที่แถบเมนูด้านบนขวา (Header) จะมีเมนู Dropdown แสดง Role ปัจจุบัน ผู้ทดสอบสามารถคลิกเปลี่ยนเป็น Admin, Technician หรือ Viewer ได้ทันที เพื่อสังเกตการเปิด/ปิดปุ่มคำสั่งต่างๆ ตามสิทธิ์
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== บทที่ 5 ==================== -->
+  <h2>บทที่ 5: คู่มือการใช้งานระบบทีละฟังก์ชัน</h2>
+
+  <h3>5.1 SCADA KPI Dashboard & Analytics</h3>
+  <p>หน้าแรกของระบบทำหน้าที่เป็นศูนย์ควบคุมภาพรวม (Command Center) สำหรับผู้บริหารและวิศวกรโรงงาน:</p>
+  <ul>
+    <li><strong>การ์ดตัวเลขสรุปสถานะ (KPI Metric Cards):</strong>
+      <ul>
+        <li><strong>Total Machines:</strong> จำนวนเครื่องจักรทั้งหมดในสายการผลิต</li>
+        <li><strong>Running:</strong> จำนวนเครื่องจักรที่กำลังเดินสายการผลิตปกติ (กรอบสีเขียว)</li>
+        <li><strong>Stop:</strong> จำนวนเครื่องจักรที่หยุดพักหรือหยุดรอคำสั่ง (กรอบสีเทา)</li>
+        <li><strong>Alarm:</strong> จำนวนเครื่องจักรที่ติดสัญญาณเตือนขัดข้อง (กรอบสีแดงพร้อมกระพริบเตือน)</li>
+        <li><strong>Maintenance:</strong> จำนวนเครื่องจักรที่อยู่ระหว่างแผนซ่อมบำรุง (กรอบสีส้ม)</li>
+      </ul>
+    </li>
+    <li><strong>กราฟวิเคราะห์แบบตอบสนอง (Interactive Recharts):</strong>
+      <ul>
+        <li><strong>Status Distribution Chart:</strong> กราฟวงแหวน (Donut Chart) แสดงสัดส่วนเปอร์เซ็นต์สถานะเครื่องจักร</li>
+        <li><strong>Alarm Severity Chart:</strong> กราฟแท่งแสดงจำนวนการแจ้งเตือนตามระดับความรุนแรง (Critical, Major, Minor, Warning)</li>
+        <li><strong>Maintenance Type Chart:</strong> กราฟแท่งแจกแจงประเภทงานซ่อม (Preventive, Corrective, Breakdown)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h3>5.2 Machine Master Management (ทะเบียนเครื่องจักร)</h3>
+  <p>โมดูลสำหรับจัดการข้อมูลเครื่องจักรหลักในสายการผลิต (CRUD: Create, Read, Update, Delete):</p>
+  <div class="flow-steps avoid-break">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-content">
+        <strong>การเพิ่มเครื่องจักรใหม่ (Add Machine)</strong>
+        กดปุ่ม <span class="badge" style="background: #0284c7; color: white;">+ เพิ่มเครื่องจักร</span> ที่มุมบนขวา กรอกข้อมูลใน Modal:
+        Machine ID (เช่น <code>CNC-001</code>), ชื่อเครื่องจักร, ประเภท (เช่น CNC Milling, Robot Arm), สถานที่ติดตั้ง (Location) และสถานะเริ่มต้น จากนั้นกดบันทึก
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-content">
+        <strong>การค้นหาและกรองหลายเงื่อนไข (Multi-Filter)</strong>
+        สามารถพิมพ์ค้นหาด้วยรหัสหรือชื่อเครื่องจักรในช่องค้นหา พร้อมทั้งเลือก Dropdown กรองสถานะ (Running, Stop, Alarm, Maintenance) และกรองตามประเภทเครื่องจักรได้พร้อมกันทันที
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-content">
+        <strong>การแก้ไขและลบข้อมูล (Edit / Delete)</strong>
+        สามารถกดไอคอนดินสอเพื่อแก้ไขสเปกเครื่อง หรือกดไอคอนถังขยะสีแดงเพื่อลบเครื่องจักร (เฉพาะ Role Admin เท่านั้น) ระบบจะมีหน้าต่างยืนยันเพื่อป้องกันการลบโดยไม่ตั้งใจ
+      </div>
+    </div>
+  </div>
+
+  <h3>5.3 Alarm Incident Management (การจัดการสัญญาณเตือน)</h3>
+  <p>โมดูลติดตามเหตุการณ์ขัดข้องของเครื่องจักร เพื่อลดระยะเวลาการหยุดชะงัก (Downtime):</p>
+  <ul>
+    <li><strong>วงจรสถานะของสัญญาณเตือน (Alarm Lifecycle):</strong>
+      <ol style="margin-top: 5px;">
+        <li><span class="badge badge-alarm">Open</span> : สัญญาณเตือนถูกกระตุ้นขึ้น ยังไม่มีช่างเข้าไปตรวจสอบ</li>
+        <li><span class="badge badge-waiting">In Progress</span> : ช่างเทคนิคกดรับงานและกำลังตรวจสอบสาเหตุหน้างาน</li>
+        <li><span class="badge badge-running">Closed</span> : ได้รับการแก้ไขเรียบร้อย บันทึกสาเหตุและแนวทางแก้ไขแล้ว</li>
+      </ol>
+    </li>
+    <li><strong>ปุ่มเลื่อนสถานะในคลิกเดียว (1-Click Quick Action):</strong> ที่แต่ละรายการแจ้งเตือน จะมีปุ่มสำหรับกดรับเรื่อง (Acknowledge) หรือปิดงาน (Resolve) ได้ทันทีโดยไม่ต้องเปิดฟอร์มหลายขั้นตอน</li>
+  </ul>
+
+  <h3>5.4 Maintenance Records & Waiting Part (งานซ่อมบำรุง)</h3>
+  <p>โมดูลบริหารจัดการใบสั่งซ่อมบำรุง ทั้งแบบตามรอบเวลา (Preventive) และแบบแก้ไขเหตุฉุกเฉิน (Breakdown):</p>
+  <ul>
+    <li><strong>ข้อมูลในใบสั่งซ่อม:</strong> รหัสเครื่องจักร, ปัญหาที่พบ (Problem Description), แผนการดำเนินงาน (Action Taken), ชื่อช่างผู้รับผิดชอบ, วันที่นัดหมาย และสถานะ</li>
+    <li><strong>สถานะ Waiting Part (Change Request ตามโจทย์):</strong>
+      ในกรณีที่ช่างเข้าตรวจสอบแล้วพบว่าชิ้นส่วนหรืออะไหล่ขาดสต็อก ช่างสามารถเลือกเปลี่ยนสถานะเป็น <span class="badge badge-waiting">Waiting Part</span> เพื่อระงับเวลางานชั่วคราวและแจ้งฝ่ายจัดซื้อได้ทันที
+    </li>
+  </ul>
+
+  <h3>5.5 Machine History Timeline (ลำดับประวัติเหตุการณ์เครื่องจักร)</h3>
+  <p>
+    ฟังก์ชันโบนัสพิเศษที่ช่วยให้วิศวกรสามารถคลิกที่รหัสเครื่องจักรใดๆ เพื่อเปิดดูหน้า <strong>History Timeline (เช่น <code>/machines/CNC-001</code>)</strong>
+    ระบบจะรวบรวมเหตุการณ์ทั้ง Alarms ที่เคยเกิดขึ้น และประวัติงานซ่อม Maintenance ทั้งหมดของเครื่องนั้นมาเรียงลำดับตามวันเวลา (Chronological Feed) เสมือนสมุดประวัติประจำตัวเครื่องจักร
+  </p>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== บทที่ 6 ==================== -->
+  <h2>บทที่ 6: ฟังก์ชันพิเศษและส่วนต่อขยาย (Bonus Features)</h2>
+  <p>เพื่อยกระดับความสมบูรณ์และตอบโจทย์คะแนนพิเศษ (Bonus +10 คะแนน) ระบบได้พัฒนาฟังก์ชันเสริมครบถ้วน:</p>
+
+  <table class="data-table avoid-break">
+    <thead>
+      <tr>
+        <th style="width: 25%;">ฟังก์ชันเสริม (Bonus)</th>
+        <th style="width: 35%;">หน้าจอ / ไฟล์ในระบบ</th>
+        <th style="width: 40%;">ประโยชน์การใช้งานจริง</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Viewer Role</strong></td>
+        <td><code>src/context/auth-context.tsx</code></td>
+        <td>สิทธิ์สำหรับผู้บริหารหรือลูกค้าที่ต้องการมอนิเตอร์ดูข้อมูลเท่านั้น ป้องกันการกดแก้ไขโดยพลการ</td>
+      </tr>
+      <tr>
+        <td><strong>Audit Logs Trail</strong></td>
+        <td><code>src/app/audit-logs/page.tsx</code></td>
+        <td>บันทึก Log กิจกรรมทุกครั้งที่มีการเพิ่ม แก้ไข หรือลบข้อมูล พร้อมบันทึก User, Action, และ Timestamp</td>
+      </tr>
+      <tr>
+        <td><strong>CSV Data Export</strong></td>
+        <td><code>src/app/reports/page.tsx</code></td>
+        <td>ส่งออกรายงานสรุปเครื่องจักร, รายการ Alarm, และบันทึกงานซ่อมเป็นไฟล์ CSV เพื่อนำไปเปิดใน Microsoft Excel</td>
+      </tr>
+      <tr>
+        <td><strong>Dark / Light Mode</strong></td>
+        <td><code>src/context/theme-context.tsx</code></td>
+        <td>สลับธีมระหว่าง Dark Industrial (สำหรับห้อง Control Room) และ Clean Light (สำหรับสำนักงานทั่วไป)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== บทที่ 7 ==================== -->
+  <h2>บทที่ 7: กฎการตรวจสอบความถูกต้องของข้อมูล (Input Validation)</h2>
+  <p>ระบบติดตั้งกลไกป้องกันความผิดพลาดของผู้ใช้งาน (Poka-Yoke) เพื่อรักษาความถูกต้องของข้อมูล (Data Integrity):</p>
+
+  <div class="callout callout-warning avoid-break">
+    <div class="callout-title">กฎข้อห้ามสำคัญ 4 ประการ (System Validation Rules)</div>
+    <ol style="margin: 4px 0 0 0; padding-left: 20px;">
+      <li><strong>ห้ามเว้นว่างช่องข้อมูลสำคัญ (Mandatory Fields):</strong> ช่องที่มีเครื่องหมายดอกจันสีแดง เช่น Machine ID, ชื่อเครื่องจักร, สาเหตุ Alarm, ช่างผู้รับผิดชอบ จะไม่สามารถกดบันทึกได้หากเว้นว่าง</li>
+      <li><strong>Machine ID ห้ามซ้ำเด็ดขาด (Duplicate Prevention):</strong> หากผู้ใช้พิมพ์ Machine ID ที่มีอยู่ในระบบแล้ว (เช่น กรอกซ้ำว่า <code>CNC-001</code>) ระบบจะขึ้นแถบเตือนสีแดงทันที และปุ่มบันทึกจะถูกปิดการทำงาน</li>
+      <li><strong>รูปแบบข้อมูลต้องถูกต้อง (Format & Type Safety):</strong> มีการบังคับเลือกตัวเลือกผ่าน Dropdown ป้องกันการพิมพ์ค่าที่ไม่อยู่ในมาตรฐาน</li>
+      <li><strong>การแจ้งเตือน Error ชัดเจน:</strong> แสดงแถบแบนเนอร์สีแดงพร้อมข้อความระบุชัดเจนว่าต้องแก้ไขจุดใด</li>
+    </ol>
+  </div>
+
+  <!-- ==================== บทที่ 8 ==================== -->
+  <h2>บทที่ 8: การติดตั้งและใช้งานระบบ (Deployment Guide)</h2>
+
+  <h3>8.1 การติดตั้งและรันในเครื่อง (Local Setup)</h3>
+  <pre><code># 1. Clone repository จาก GitHub
+git clone https://github.com/siriwat-kum-cmyk/PLC-WEB.git
+cd PLC-WEB
+
+# 2. ติดตั้ง Dependencies
+npm install
+
+# 3. รัน Development Server
+npm run dev
+# เปิดเบราว์เซอร์ไปที่ http://localhost:3000</code></pre>
+
+  <h3>8.2 การ Deploy บน Vercel Platform</h3>
+  <ol>
+    <li>เข้าเว็บไซต์ <strong>https://vercel.com/new</strong> และล็อกอินด้วยบัญชี GitHub</li>
+    <li>เลือก Import โปรเจกต์ <code>siriwat-kum-cmyk/PLC-WEB</code></li>
+    <li>(ทางเลือก) ระบุตัวแปรใน Environment Variables: <code>NEXT_PUBLIC_SUPABASE_URL</code> และ <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></li>
+    <li>กดปุ่ม <strong>Deploy</strong> ระบบจะคอมไพล์และเปิด URL ใช้งานได้จริงภายใน 1 นาที</li>
+  </ol>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== บทที่ 9 ==================== -->
+  <h2>บทที่ 9: รายงานการใช้ AI ในกระบวนการพัฒนา (AI Utilization Report)</h2>
+  <p>ตามแนวคิดของรายวิชาที่อนุญาตให้ใช้ AI ช่วยในการพัฒนาอย่างเต็มศักยภาพ โครงการนี้ได้ใช้ AI เข้ามาสนับสนุนใน 6 ขั้นตอนหลัก:</p>
+
+  <table class="data-table avoid-break">
+    <thead>
+      <tr>
+        <th style="width: 25%;">ขั้นตอนการพัฒนา</th>
+        <th style="width: 35%;">เครื่องมือและบทบาทของ AI</th>
+        <th style="width: 40%;">ผลลัพธ์ที่ได้จาก AI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. วิเคราะห์ Requirement</strong></td>
+        <td>AI Architecture Planning & Checklist Generator</td>
+        <td>แปลงเอกสารโจทย์อาจารย์เป็นแผนงาน 10 ขั้นตอน และแผนจัดสรรสิทธิ์ RBAC</td>
+      </tr>
+      <tr>
+        <td><strong>2. ออกแบบฐานข้อมูล (SQL)</strong></td>
+        <td>AI Database Normalization Assistant</td>
+        <td>สร้าง DDL Schema, Foreign Keys, Triggers อัตโนมัติ และ Row Level Security (RLS)</td>
+      </tr>
+      <tr>
+        <td><strong>3. พัฒนาโค้ด Frontend & UI</strong></td>
+        <td>AI Full-Stack Pair Programmer</td>
+        <td>สร้าง Component แบบ Responsive, Dark/Light Mode, และ Interactive Dashboard Charts</td>
+      </tr>
+      <tr>
+        <td><strong>4. ทดสอบและ Debugging</strong></td>
+        <td>AI Error Diagnostics & Type Safety Checker</td>
+        <td>วิเคราะห์และแก้ไขปัญหา Unused Imports, CSS Variant Plugin และ ESLint Errors 0 จุด</td>
+      </tr>
+      <tr>
+        <td><strong>5. จัดทำ CI/CD & DevOps</strong></td>
+        <td>AI DevOps Configurator</td>
+        <td>เขียนไฟล์ GitHub Actions Workflow (ci.yml) และคอนฟิก Vercel Build Settings</td>
+      </tr>
+      <tr>
+        <td><strong>6. สรุปเอกสารและคู่มือ</strong></td>
+        <td>AI Technical Writer</td>
+        <td>จัดทำเอกสารคู่มือระบบฉบับเต็ม และสไลด์นำเสนอสำหรับผู้บรรยาย 3 คน</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #cbd5e1; color: #64748b; font-size: 9pt;">
+    — สิ้นสุดเอกสารคู่มือการใช้งานระบบ Alarm & Maintenance Management System —
+  </div>
+
+</body>
+</html>

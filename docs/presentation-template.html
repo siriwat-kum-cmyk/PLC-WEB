@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>สไลด์นำเสนอระบบ Alarm & Maintenance Management System</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+    @page {
+      size: 297mm 167.0625mm landscape; /* Exact 16:9 ratio */
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Sarabun', sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+    }
+
+    .slide {
+      width: 297mm;
+      height: 167.0625mm;
+      padding: 12mm 16mm;
+      page-break-after: always;
+      position: relative;
+      background: linear-gradient(135deg, #0b0f17 0%, #111827 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid #1e293b;
+    }
+
+    /* Top Header Bar */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .slide-category {
+      font-family: 'Prompt', sans-serif;
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #38bdf8;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slide-category::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: #0284c7;
+      border-radius: 50%;
+    }
+
+    .presenter-pill {
+      font-family: 'Prompt', sans-serif;
+      font-size: 8.5pt;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .p1 { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .p2 { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.3); }
+    .p3 { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .pall { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    /* Slide Titles */
+    .slide-title-area {
+      margin-bottom: 10px;
+    }
+
+    .slide-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 19pt;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-family: 'Prompt', sans-serif;
+      font-size: 9.5pt;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    /* Main Content Area */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      height: 100%;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .card-highlight {
+      background: rgba(14, 116, 144, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .card-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-desc {
+      font-size: 9pt;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5pt;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+    }
+
+    .badge-running { background: rgba(34, 197, 94, 0.15); color: #4ade80; border-color: rgba(34, 197, 94, 0.3); }
+    .badge-stop { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border-color: rgba(148, 163, 184, 0.3); }
+    .badge-alarm { background: rgba(239, 68, 68, 0.15); color: #f87171; border-color: rgba(239, 68, 68, 0.3); }
+    .badge-maintenance { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3); }
+    .badge-waiting { background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
+
+    /* Tables */
+    table.slide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+    }
+
+    table.slide-table th, table.slide-table td {
+      border: 1px solid #334155;
+      padding: 5px 8px;
+      text-align: left;
+    }
+
+    table.slide-table th {
+      background: #1e293b;
+      color: #38bdf8;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 600;
+    }
+
+    table.slide-table tr:nth-child(even) {
+      background: rgba(30, 41, 59, 0.3);
+    }
+
+    /* Footer */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #1e293b;
+      padding-top: 6px;
+      margin-top: 8px;
+      font-size: 7.5pt;
+      color: #64748b;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Custom Title Slide */
+    .title-slide-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20mm;
+    }
+
+    .main-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 26pt;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #ffffff 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .main-subtitle {
+      font-family: 'Prompt', sans-serif;
+      font-size: 13pt;
+      color: #94a3b8;
+      margin-bottom: 25px;
+    }
+
+    .team-badge-container {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .team-badge {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .team-badge-role {
+      font-family: 'Prompt', sans-serif;
+      font-size: 8pt;
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    .team-badge-name {
+      font-family: 'Prompt', sans-serif;
+      font-size: 10pt;
+      font-weight: 500;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== SLIDE 1: COVER [Presenter 1] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">Programming in Automation Systems</div>
+      <div class="presenter-pill p1">ผู้บรรยาย: คนที่ 1, 2, 3 (ทีมงาน)</div>
+    </div>
+    <div class="slide-body">
+      <div class="title-slide-content">
+        <div style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25); font-family: 'Prompt', sans-serif; font-size: 9pt; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; font-weight: 600;">
+          AUTOMATION WEB APPLICATION PROJECT
+        </div>
+        <div class="main-title">Alarm & Maintenance Management System</div>
+        <div class="main-subtitle">ระบบบริหารจัดการสัญญาณเตือนและงานซ่อมบำรุงเครื่องจักรอัตโนมัติด้วย AI</div>
+        
+        <div class="team-badge-container">
+          <div class="team-badge">
+            <div class="team-badge-role">👤 ผู้บรรยายคนที่ 1</div>
+            <div class="team-badge-name">ภาพรวม, วัตถุประสงค์ & สถาปัตยกรรม</div>
+          </div>
+          <div class="team-badge">
+            <div class="team-badge-role">👤 ผู้บรรยายคนที่ 2</div>
+            <div class="team-badge-name">ฟังก์ชันหลัก, เครื่องจักร, Alarm & งานซ่อม</div>
+          </div>
+          <div class="team-badge">
+            <div class="team-badge-role">👤 ผู้บรรยายคนที่ 3</div>
+            <div class="team-badge-name">แดชบอร์ด, ฟังก์ชันโบนัส, ประโยชน์ & AI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NEXT.JS • TAILWIND CSS • SUPABASE • GITHUB ACTIONS • VERCEL</span>
+      <span>สไลด์ 1 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 2: CONCEPT & OBJECTIVES [Presenter 1] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">1. บทนำและแนวคิดโครงการ</div>
+      <div class="presenter-pill p1">👤 ผู้บรรยายคนที่ 1</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">แนวคิดและเป้าหมายของระบบ (System Concept & Goals)</h2>
+      <div class="slide-subtitle">ตอบโจทย์การพัฒนา Web Application สำหรับงาน Automation และการบริหารจัดการเครื่องจักร</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card card-highlight">
+          <div class="card-title">🎯 เป้าหมายตามโจทย์วิชา</div>
+          <div class="card-desc">
+            • พัฒนา Web Application สำเร็จรูปเพื่อสนับสนุนงานด้าน Automation<br>
+            • บริหารจัดการสถานะเครื่องจักรในโรงงานแบบเรียลไทม์<br>
+            • ใช้เทคโนโลยีสมัยใหม่ควบคู่กับการใช้ AI ในการวิเคราะห์และพัฒนา
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚙️ ภารกิจหลักของระบบ</div>
+          <div class="card-desc">
+            • <strong>Machine Master:</strong> บันทึกและควบคุมทะเบียนเครื่องจักร<br>
+            • <strong>Alarm Management:</strong> ตรวจจับและจัดการเหตุขัดข้องตามลำดับขั้น<br>
+            • <strong>Maintenance Tracking:</strong> วางแผนงานซ่อมบำรุงและรองรับการรออะไหล่
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">💡 ประสิทธิภาพการส่งมอบ</div>
+          <div class="card-desc">
+            • ระบบทำงานได้ 100% ผ่านโครงข่าย Cloud Vercel<br>
+            • มีระบบสำรองข้อมูล (Dual-mode) ไม่พังแม้ไม่ได้ต่อฐานข้อมูลภายนอก<br>
+            • การควบคุมสิทธิ์ที่รัดกุมตามมาตรฐานโรงงาน
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>ALARM & MAINTENANCE MANAGEMENT SYSTEM</span>
+      <span>สไลด์ 2 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 3: REQUIREMENTS CHECKLIST [Presenter 1] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">1. ขอบเขตงานตามเกณฑ์การประเมิน</div>
+      <div class="presenter-pill p1">👤 ผู้บรรยายคนที่ 1</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">ขอบเขตความสามารถตามโจทย์ (Requirements 3.1 - 3.12)</h2>
+      <div class="slide-subtitle">ความครบถ้วนสมบูรณ์ตามเกณฑ์การให้คะแนน 100 คะแนนเต็ม + 10 คะแนนโบนัสพิเศษ</div>
+    </div>
+    <div class="slide-body">
+      <table class="slide-table">
+        <thead>
+          <tr>
+            <th>ข้อกำหนด</th>
+            <th>หัวข้อตามโจทย์</th>
+            <th>ผลลัพธ์ในระบบ</th>
+            <th>ข้อกำหนด</th>
+            <th>หัวข้อตามโจทย์</th>
+            <th>ผลลัพธ์ในระบบ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>3.1</strong></td>
+            <td>Auth & Roles</td>
+            <td>Login/Logout + Admin, Tech, <strong>Viewer (Bonus)</strong></td>
+            <td><strong>3.7</strong></td>
+            <td>Validation</td>
+            <td>ตรวจฟิลด์ว่าง, ห้าม ID ซ้ำ, แถบเตือนสีแดง</td>
+          </tr>
+          <tr>
+            <td><strong>3.2</strong></td>
+            <td>Machine Master</td>
+            <td>บันทึก ID, Name, Type, Location, Status ครบ CRUD</td>
+            <td><strong>3.8</strong></td>
+            <td>Database</td>
+            <td>Supabase PostgreSQL + RLS + Foreign Keys</td>
+          </tr>
+          <tr>
+            <td><strong>3.3</strong></td>
+            <td>Alarm Record</td>
+            <td>Open ➔ In Progress ➔ Closed + Cause & Resolution</td>
+            <td><strong>3.9</strong></td>
+            <td>GitHub</td>
+            <td>เก็บบน GitHub พร้อมประวัติ 11 Commits ต่อเนื่อง</td>
+          </tr>
+          <tr>
+            <td><strong>3.4</strong></td>
+            <td>Maintenance</td>
+            <td>บันทึก PM/BM + <strong>Waiting Part (Change Request)</strong></td>
+            <td><strong>3.10</strong></td>
+            <td>Actions CI</td>
+            <td>Workflow ตรวจ Lint, TypeScript และ Build อัตโนมัติ</td>
+          </tr>
+          <tr>
+            <td><strong>3.5</strong></td>
+            <td>Search & Filter</td>
+            <td>Multi-Filter ค้นหาและกรองหลายเงื่อนไขพร้อมกัน</td>
+            <td><strong>3.11</strong></td>
+            <td>Deployment</td>
+            <td>Deploy บน Vercel พร้อมเปิดใช้งานได้จริง</td>
+          </tr>
+          <tr>
+            <td><strong>3.6</strong></td>
+            <td>Dashboard</td>
+            <td>KPI ยอดเครื่องจักร, สถานะ และกราฟ Recharts วิเคราะห์</td>
+            <td><strong>3.12</strong></td>
+            <td>README</td>
+            <td>เอกสารสมบูรณ์พร้อมรายงานการใช้ AI พัฒนา</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>EVALUATION CRITERIA: 100% COMPLETE + 10 BONUS POINTS</span>
+      <span>สไลด์ 3 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 4: TECH STACK & ARCHITECTURE [Presenter 1] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">1. สถาปัตยกรรมระบบ</div>
+      <div class="presenter-pill p1">👤 ผู้บรรยายคนที่ 1</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">สถาปัตยกรรมและเทคโนโลยี (Architecture & Tech Stack)</h2>
+      <div class="slide-subtitle">การผสมผสานเทคโนโลยี Modern Web Full-Stack และระบบ Dual-Mode Data Layer</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-title">⚡ Next.js 14+</div>
+          <div class="card-desc">
+            • App Router สถาปัตยกรรมใหม่<br>
+            • React Server / Client Components<br>
+            • Dynamic Route ประวัติเครื่องจักร<br>
+            • Fast Page Load & SEO
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🎨 Tailwind CSS</div>
+          <div class="card-desc">
+            • SCADA Industrial Theme<br>
+            • Custom Variant: <code>light:*</code><br>
+            • รองรับ Dark / Light Mode ทันที<br>
+            • Fully Responsive ทุกหน้าจอ
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🗄️ Supabase Cloud</div>
+          <div class="card-desc">
+            • PostgreSQL Database เชิงสัมพันธ์<br>
+            • Supabase Authentication<br>
+            • Row Level Security (RLS)<br>
+            • Triggers ตรวจสอบประวัติ
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🚀 DevOps & CI/CD</div>
+          <div class="card-desc">
+            • GitHub Actions ตรวจสอบ Build<br>
+            • Vercel Edge Deployment<br>
+            • Auto-Deploy เมื่อมี Commit<br>
+            • Zero Downtime Deployments
+          </div>
+        </div>
+      </div>
+      <div class="card card-highlight" style="margin-top: 8px;">
+        <div class="card-title" style="font-size: 9.5pt;">💡 นวัตกรรมสถาปัตยกรรม: Dual-Mode Data Architecture</div>
+        <div class="card-desc" style="font-size: 8.5pt;">
+          ระบบทำงานได้ทั้ง <strong>Live Supabase Connection</strong> (บันทึกข้อมูลเข้าฐานข้อมูลจริงบน Cloud) และ <strong>Local Storage Demo Fallback</strong> ทำให้เมื่อเปิดเว็บผ่าน Vercel แม้ไม่มีการใส่ API Key ระบบจะจำลองข้อมูลเครื่องจักรให้ทดลองกดใช้งานได้ทันที 100% ไม่มีหน้า Error
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>FULL-STACK SCADA INDUSTRIAL ARCHITECTURE</span>
+      <span>สไลด์ 4 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 5: DATABASE SCHEMA [Presenter 1] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">1. โครงสร้างฐานข้อมูล</div>
+      <div class="presenter-pill p1">👤 ผู้บรรยายคนที่ 1</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">โครงสร้างฐานข้อมูลและการรักษาความปลอดภัย (Database & Security)</h2>
+      <div class="slide-subtitle">การออกแบบฐานข้อมูลตามหลัก Normalization พร้อมความสัมพันธ์ Foreign Keys และ RLS</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🗃️ 5 ตารางหลักใน Supabase (PostgreSQL)</div>
+          <div class="card-desc">
+            • <code>profiles</code> : เก็บสิทธิ์ผู้ใช้ (Admin, Technician, Viewer)<br>
+            • <code>machines</code> : ทะเบียนเครื่องจักร (Machine ID UNIQUE)<br>
+            • <code>alarms</code> : ประวัติการแจ้งเตือน (Foreign Key ➔ machines)<br>
+            • <code>maintenance_records</code> : ใบสั่งซ่อม (รองรับ Waiting Part)<br>
+            • <code>audit_logs</code> : บันทึกประวัติการกระทำเพื่อความโปร่งใส
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🛡️ Row Level Security (RLS Policies)</div>
+          <div class="card-desc">
+            • <strong>Admin:</strong> สิทธิ์เต็มทุกตาราง (SELECT, INSERT, UPDATE, DELETE)<br>
+            • <strong>Technician:</strong> แก้ไขงานซ่อมและรับแจ้งเหตุ Alarm ได้<br>
+            • <strong>Viewer:</strong> เรียกดูข้อมูลได้อย่างเดียว (Read-only)<br>
+            • บังคับใช้ความปลอดภัยถึงระดับ Database Engine โดยตรง
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 8px; background: rgba(15, 23, 42, 0.7); font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: #38bdf8;">
+        <span>Foreign Key: alarms.machine_id ➔ machines.id (ON DELETE CASCADE)</span><br>
+        <span>Foreign Key: maintenance_records.machine_id ➔ machines.id (ON DELETE CASCADE)</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>ส่งต่อให้ผู้บรรยายคนที่ 2: ฟังก์ชันการทำงานจริง ➔</span>
+      <span>สไลด์ 5 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 6: AUTH & RBAC [Presenter 2] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">2. ระบบสิทธิ์ผู้ใช้งาน</div>
+      <div class="presenter-pill p2">👤 ผู้บรรยายคนที่ 2</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">ระบบยืนยันตัวตนและจัดการสิทธิ์ (Authentication & RBAC)</h2>
+      <div class="slide-subtitle">การควบคุมสิทธิ์ตามบทบาทอย่างรัดกุม พร้อมปุ่มทดสอบสิทธิ์ 1-Click Role Switcher</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card" style="border-top: 3px solid #ef4444;">
+          <div class="card-title" style="color: #f87171;">🔴 Role: Admin</div>
+          <div class="card-desc">
+            <strong>ผู้ดูแลระบบสูงสุด</strong><br>
+            • เพิ่ม / แก้ไข / ลบ ทะเบียนเครื่องจักร<br>
+            • จัดการ Alarm และใบสั่งซ่อมบำรุง<br>
+            • ดูบันทึก Audit Logs ตรวจสอบย้อนหลัง<br>
+            • ส่งออกรายงาน CSV ข้อมูลทั้งหมด
+          </div>
+        </div>
+        <div class="card" style="border-top: 3px solid #fbbf24;">
+          <div class="card-title" style="color: #fbbf24;">🟡 Role: Technician</div>
+          <div class="card-desc">
+            <strong>ช่างเทคนิคผู้ปฏิบัติงาน</strong><br>
+            • ดูข้อมูลสเปกเครื่องจักรและประวัติ<br>
+            • กดรับงานและเปลี่ยนสถานะ Alarm<br>
+            • บันทึกการแก้ไขงานซ่อม (Action Taken)<br>
+            • สลับสถานะรออะไหล่ (Waiting Part)
+          </div>
+        </div>
+        <div class="card" style="border-top: 3px solid #38bdf8;">
+          <div class="card-title" style="color: #38bdf8;">🔵 Role: Viewer (Bonus)</div>
+          <div class="card-desc">
+            <strong>ผู้สังเกตการณ์ / ผู้บริหาร</strong><br>
+            • ดูหน้า SCADA KPI Dashboard<br>
+            • เรียกดูรายงานสถานะเครื่องจักร<br>
+            • ดูประวัติเหตุการณ์ Timeline<br>
+            • ปิดการทำงานปุ่มแก้ไข/ลบทั้งหมด
+          </div>
+        </div>
+      </div>
+      <div class="card card-highlight" style="margin-top: 8px;">
+        <div class="card-title" style="font-size: 9pt;">⚡ 1-Click Evaluator Role Switcher บน Header</div>
+        <div class="card-desc" style="font-size: 8.5pt;">
+          ช่วยให้อาจารย์หรือผู้ประเมินสามารถคลิกสลับบทบาทระหว่าง Admin ⇄ Technician ⇄ Viewer ได้ทันทีโดยไม่ต้องล็อกเอาต์ เพื่อทดสอบดูความแตกต่างของสิทธิ์และปุ่มสั่งการในระบบ
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>ROLE-BASED ACCESS CONTROL (RBAC MATRIX)</span>
+      <span>สไลด์ 6 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 7: MACHINE MASTER [Presenter 2] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">2. ทะเบียนเครื่องจักร</div>
+      <div class="presenter-pill p2">👤 ผู้บรรยายคนที่ 2</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">Machine Master Management & Data Validation</h2>
+      <div class="slide-subtitle">การจัดการข้อมูลเครื่องจักรแบบสมบูรณ์ พร้อมระบบป้องกันรหัสเครื่องจักรซ้ำ</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📋 คุณสมบัติของ Machine Master</div>
+          <div class="card-desc">
+            • <strong>บันทึกข้อมูลครบถ้วน:</strong> Machine ID, Name, Type, Location, Status, Description<br>
+            • <strong>สถานะมาตรฐาน 4 สถานะ:</strong><br>
+            &nbsp;&nbsp;<span class="badge badge-running">Running</span> เดินเครื่องปกติ<br>
+            &nbsp;&nbsp;<span class="badge badge-stop">Stop</span> หยุดการทำงาน<br>
+            &nbsp;&nbsp;<span class="badge badge-alarm">Alarm</span> เครื่องจักรแจ้งเตือนขัดข้อง<br>
+            &nbsp;&nbsp;<span class="badge badge-maintenance">Maintenance</span> กำลังซ่อมบำรุง<br>
+            • <strong>CRUD ครบวงจร:</strong> สร้างใหม่, แก้ไข, ลบข้อมูล และดูรายละเอียด
+          </div>
+        </div>
+        <div class="card card-highlight">
+          <div class="card-title">🛡️ ระบบ Input Validation & Duplicate Protection</div>
+          <div class="card-desc">
+            • <strong>Machine ID ห้ามซ้ำเด็ดขาด:</strong> ตรวจสอบแบบ Real-time ทันทีที่พิมพ์ หากซ้ำจะแจ้งเตือนแถบสีแดงและล็อคปุ่มบันทึก<br>
+            • <strong>ห้ามเว้นว่างช่องสำคัญ:</strong> มีการบังคับกรอกข้อมูลที่จำเป็นทุกฟิลด์<br>
+            • <strong>Multi-Filter ค้นหาฉับไว:</strong> ค้นหาด้วยคำสำคัญ + กรองสถานะ + กรองประเภทเครื่องจักรได้พร้อมกัน
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>MACHINE MASTER WITH REAL-TIME DUPLICATE DETECTION</span>
+      <span>สไลด์ 7 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 8: ALARM INCIDENT [Presenter 2] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">2. การจัดการสัญญาณเตือน</div>
+      <div class="presenter-pill p2">👤 ผู้บรรยายคนที่ 2</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">Alarm Incident Management & Lifecycle Workflow</h2>
+      <div class="slide-subtitle">กระบวนการติดตามสัญญาณเตือนขัดข้องตั้งแต่เกิดเหตุจนแก้ไขแล้วเสร็จ (3 ขั้นตอน)</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card" style="border-left: 4px solid #ef4444;">
+          <div class="card-title" style="color: #f87171;">1. Open (เกิดเหตุ)</div>
+          <div class="card-desc">
+            • สัญญาณเตือนถูกกระตุ้นขึ้นในสายการผลิต<br>
+            • บันทึก Alarm Code, วันที่/เวลา, สาเหตุเบื้องต้น<br>
+            • แจ้งเตือนสัญลักษณ์กระพริบแดงใน Dashboard<br>
+            • รอดำเนินการรับเรื่อง
+          </div>
+        </div>
+        <div class="card" style="border-left: 4px solid #fbbf24;">
+          <div class="card-title" style="color: #fbbf24;">2. In Progress (รับเรื่อง)</div>
+          <div class="card-desc">
+            • ช่างเทคนิคกดรับงาน (Acknowledge)<br>
+            • เข้าตรวจสอบหน้างานและตรวจเช็กระบบไฟฟ้า/กลไก<br>
+            • เครื่องจักรเข้าสู่โหมดการแก้ไขปัญหา<br>
+            • บันทึกความคืบหน้าระหว่างปฏิบัติงาน
+          </div>
+        </div>
+        <div class="card" style="border-left: 4px solid #22c55e;">
+          <div class="card-title" style="color: #4ade80;">3. Closed (ปิดงาน)</div>
+          <div class="card-desc">
+            • แก้ไขข้อขัดข้องเรียบร้อยแล้ว<br>
+            • บันทึกวิธีแก้ไข (Resolution) เพื่อเป็นฐานความรู้<br>
+            • รีเซ็ตสถานะเครื่องจักรกลับสู่ความพร้อมใช้งาน<br>
+            • บันทึกเวลาที่ใช้ในการกู้คืนระบบ
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 8px;">
+        <div class="card-title" style="font-size: 9.5pt;">⚡ 1-Click Quick Action Button</div>
+        <div class="card-desc" style="font-size: 8.5pt;">
+          ช่างเทคนิคสามารถกดปุ่มเลื่อนสถานะจาก <strong>Open ➔ In Progress ➔ Closed</strong> ได้จากตารางรายการทันที เพื่อความรวดเร็วในการปฏิบัติงานจริง
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>INCIDENT MANAGEMENT LIFECYCLE (OPEN ➔ IN PROGRESS ➔ CLOSED)</span>
+      <span>สไลด์ 8 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 9: MAINTENANCE & WAITING PART [Presenter 2] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">2. งานซ่อมบำรุง & CHANGE REQUEST</div>
+      <div class="presenter-pill p2">👤 ผู้บรรยายคนที่ 2</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">Maintenance Record & การรองรับสถานะ "Waiting Part"</h2>
+      <div class="slide-subtitle">การออกใบสั่งซ่อมบำรุงเชิงป้องกันและแก้ไข พร้อมตอบโจทย์ Change Request ข้อกำหนดพิเศษ</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🔧 การบริหารงานซ่อมบำรุง (Maintenance)</div>
+          <div class="card-desc">
+            • <strong>ประเภทงานซ่อม:</strong> Preventive (PM), Corrective (CM), Breakdown (BM)<br>
+            • <strong>ข้อมูลครบถ้วน:</strong> ระบุเครื่องจักร, อาการปัญหา (Problem), แผนการดำเนินงาน (Action Taken), ช่างผู้รับผิดชอบ และวันนัดหมาย<br>
+            • <strong>สถานะมาตรฐาน:</strong> Scheduled ➔ In Progress ➔ Completed
+          </div>
+        </div>
+        <div class="card card-highlight" style="border: 2px solid #a855f7;">
+          <div class="card-title" style="color: #c084fc;">⭐ สถานะ "Waiting Part" (Change Request)</div>
+          <div class="card-desc">
+            • <strong>ความสำคัญ:</strong> รองรับกรณีเข้าซ่อมแล้วพบว่าอะไหล่ขาดสต็อก หรือต้องรอการสั่งซื้อจากต่างประเทศ<br>
+            • <strong>การทำงาน:</strong> สามารถเลือกสถานะ <span class="badge badge-waiting">Waiting Part</span> ได้ทันที<br>
+            • ช่วยแยกแยะงานซ่อมที่ล่าช้าเพราะรออะไหล่ ออกจากงานซ่อมทั่วไปได้อย่างแม่นยำ
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>MAINTENANCE MANAGEMENT WITH WAITING PART CHANGE REQUEST</span>
+      <span>สไลด์ 9 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 10: MACHINE HISTORY TIMELINE [Presenter 2] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">2. ประวัติเครื่องจักรย้อนหลัง</div>
+      <div class="presenter-pill p2">👤 ผู้บรรยายคนที่ 2</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">Machine History Timeline (บันทึกประวัติเหตุการณ์ย้อนหลัง)</h2>
+      <div class="slide-subtitle">ฟังก์ชันโบนัสพิเศษ รวบรวมเหตุการณ์ Alarms และงานซ่อมของแต่ละเครื่องเป็นไทม์ไลน์</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📜 สมุดประวัติเครื่องจักรเสมือน (Digital Logbook)</div>
+          <div class="card-desc">
+            • สามารถคลิกเลือกรหัสเครื่องจักรใดๆ เพื่อเข้าสู่หน้า Timeline (เช่น <code>/machines/CNC-001</code>)<br>
+            • รวบรวมทุกเหตุการณ์ Alarm Incident และ Maintenance Orders มาจัดเรียงตามลำดับเวลา (Chronological Order)<br>
+            • แสดงข้อมูลสเปกเครื่องจักร สถานที่ติดตั้ง และสรุปสถิติความถี่ของการเกิดเหตุ
+          </div>
+        </div>
+        <div class="card card-highlight">
+          <div class="card-title">💡 ประโยชน์ต่อการวิเคราะห์ทางวิศวกรรม</div>
+          <div class="card-desc">
+            • วิศวกรสามารถดูแนวโน้มได้ว่าเครื่องนี้เคยเสียจุดไหนบ่อยครั้ง (Root Cause Analysis)<br>
+            • ช่างคนก่อนแก้ไขไว้อย่างไร (Action Taken & Resolution History)<br>
+            • สนับสนุนการวางแผน Preventive Maintenance ได้อย่างตรงจุด
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>ส่งต่อให้ผู้บรรยายคนที่ 3: แดชบอร์ด, ฟังก์ชันโบนัส, ประโยชน์ & สรุปผล ➔</span>
+      <span>สไลด์ 10 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 11: SCADA KPI DASHBOARD [Presenter 3] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">3. แดชบอร์ดและการวิเคราะห์</div>
+      <div class="presenter-pill p3">👤 ผู้บรรยายคนที่ 3</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">SCADA KPI Dashboard & Visual Analytics</h2>
+      <div class="slide-subtitle">ศูนย์ควบคุมภาพรวมโรงงานอัจฉริยะ แสดงสถานะเครื่องจักรและกราฟวิเคราะห์แนวโน้ม</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-4" style="margin-bottom: 8px;">
+        <div class="card" style="border-left: 3px solid #38bdf8;">
+          <div class="card-title" style="font-size: 9pt;">Total Machines</div>
+          <div style="font-size: 16pt; font-weight: bold; color: #38bdf8; font-family: 'JetBrains Mono';">12 เครื่อง</div>
+        </div>
+        <div class="card" style="border-left: 3px solid #22c55e;">
+          <div class="card-title" style="font-size: 9pt;">Running Normal</div>
+          <div style="font-size: 16pt; font-weight: bold; color: #4ade80; font-family: 'JetBrains Mono';">8 เครื่อง</div>
+        </div>
+        <div class="card" style="border-left: 3px solid #ef4444;">
+          <div class="card-title" style="font-size: 9pt;">Active Alarms</div>
+          <div style="font-size: 16pt; font-weight: bold; color: #f87171; font-family: 'JetBrains Mono';">2 เครื่อง</div>
+        </div>
+        <div class="card" style="border-left: 3px solid #fbbf24;">
+          <div class="card-title" style="font-size: 9pt;">Under Maintenance</div>
+          <div style="font-size: 16pt; font-weight: bold; color: #fbbf24; font-family: 'JetBrains Mono';">2 เครื่อง</div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📊 Interactive Recharts Analytics</div>
+          <div class="card-desc">
+            • <strong>Donut Chart:</strong> สัดส่วนสถานะการทำงาน (Running, Stop, Alarm, Maintenance)<br>
+            • <strong>Bar Chart:</strong> แจกแจงความรุนแรงของ Alarm (Critical, Major, Minor, Warning)<br>
+            • <strong>Work Order Distribution:</strong> สถิติจำนวนงานซ่อมตามประเภท (PM, CM, BM)
+          </div>
+        </div>
+        <div class="card card-highlight">
+          <div class="card-title">⚡ Real-time Decision Making</div>
+          <div class="card-desc">
+            • ผู้จัดการฝ่ายผลิตและหัวหน้าช่างสามารถเห็นภาพรวมสายการผลิตใน 3 วินาที<br>
+            • จัดลำดับความสำคัญในการเข้าช่วยเหลือเครื่องที่มีสัญญาณเตือน Critical ก่อนทันที
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>REAL-TIME FACTORY COMMAND CENTER WITH RECHARTS</span>
+      <span>สไลด์ 11 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 12: BONUS FEATURES [Presenter 3] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">3. ฟังก์ชันพิเศษเพื่อคะแนนโบนัส</div>
+      <div class="presenter-pill p3">👤 ผู้บรรยายคนที่ 3</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">คะแนนพิเศษ (Bonus Features +10 คะแนนเต็ม)</h2>
+      <div class="slide-subtitle">การขยายขีดความสามารถของระบบให้เหนือกว่าเกณฑ์มาตรฐานพื้นฐาน</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card card-highlight">
+          <div class="card-title">🛡️ Audit Logs Trail</div>
+          <div class="card-desc">
+            • บันทึกประวัติกิจกรรมสำคัญในระบบทุกรายการ<br>
+            • บันทึกว่าใคร (User) ทำอะไร (Action) กับเครื่องไหน และเมื่อไหร่<br>
+            • ตรวจสอบย้อนหลังได้ 100% ตามมาตรฐานความปลอดภัย
+          </div>
+        </div>
+        <div class="card card-highlight">
+          <div class="card-title">📥 Export CSV / Excel</div>
+          <div class="card-desc">
+            • ดาวน์โหลดรายงานเครื่องจักร, รายการ Alarms, และบันทึกงานซ่อมออกมาเป็นไฟล์ <code>.csv</code><br>
+            • นำไปประมวลผลต่อใน Microsoft Excel หรือทำรายงานส่งผู้บริหารประจำเดือนได้ทันที
+          </div>
+        </div>
+        <div class="card card-highlight">
+          <div class="card-title">🌓 Dark / Light Mode</div>
+          <div class="card-desc">
+            • สลับธีมได้ลื่นไหลผ่านปุ่มที่แถบ Header<br>
+            • โหมด Dark สำหรับห้องมอนิเตอร์โรงงาน (ลดอาการตาล้า)<br>
+            • โหมด Light ปรับ Contrast คมชัดสำหรับห้องทำงานสำนักงาน
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>FULL BONUS COMPLIANCE: AUDIT LOGS, CSV EXPORT, DARK/LIGHT THEME</span>
+      <span>สไลด์ 12 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 13: DEVOPS & CI/CD [Presenter 3] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">3. ระบบอัตโนมัติในการส่งมอบงาน</div>
+      <div class="presenter-pill p3">👤 ผู้บรรยายคนที่ 3</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">GitHub Actions CI & Vercel Cloud Deployment</h2>
+      <div class="slide-subtitle">กระบวนการตรวจสอบคุณภาพโค้ดอัตโนมัติ และการส่งมอบซอฟต์แวร์ระดับสากล</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🐙 GitHub Actions Continuous Integration (CI)</div>
+          <div class="card-desc">
+            • ทุกครั้งที่มีการ <code>git push</code> ไปยังสาขา <code>main</code> ระบบจะรันอัตโนมัติ:<br>
+            &nbsp;&nbsp;1. ติดตั้ง Dependencies (<code>npm ci</code>)<br>
+            &nbsp;&nbsp;2. ตรวจสอบโค้ดสะอาด (<code>npm run lint</code> ➔ 0 errors)<br>
+            &nbsp;&nbsp;3. ตรวจสอบความถูกต้องของ Type (<code>npm run type-check</code> ➔ 0 errors)<br>
+            &nbsp;&nbsp;4. ตรวจสอบการ Build สำหรับ Production (<code>npm run build</code>)
+          </div>
+        </div>
+        <div class="card card-highlight">
+          <div class="card-title">▲ Vercel Edge Deployment</div>
+          <div class="card-desc">
+            • ระบบเชื่อมต่อกับ GitHub Repository เพื่อ Auto-Deploy ทันทีที่ Build ผ่าน<br>
+            • มีการจำลอง <strong>Dual-Mode Data Architecture</strong><br>
+            • กรรมการหรืออาจารย์สามารถเปิดใช้งานบนมือถือ แท็บเล็ต หรือพีซีได้ทันทีตลอด 24 ชั่วโมง
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>AUTOMATED QUALITY ASSURANCE WITH GITHUB ACTIONS & VERCEL</span>
+      <span>สไลด์ 13 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 14: INDUSTRIAL BENEFITS [Presenter 3] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">3. ประโยชน์ในงานอุตสาหกรรม</div>
+      <div class="presenter-pill p3">👤 ผู้บรรยายคนที่ 3</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">ข้อดีและประโยชน์การนำไปประยุกต์ใช้ในโรงงานจริง</h2>
+      <div class="slide-subtitle">คุณค่าทางวิศวกรรมที่ช่วยเพิ่มประสิทธิภาพการผลิตและลดความสูญเสียในระบบอัตโนมัติ</div>
+    </div>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">⏱️ ลดระยะเวลาการซ่อม (MTTR)</div>
+          <div class="card-desc">
+            เมื่อเกิด Alarm ช่างสามารถรู้รหัสและสาเหตุได้ทันทีผ่านระบบ ลดเวลาในการเดินหาสาเหตุหน้างาน และเข้าแก้ไขได้ตรงจุดทันที
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📦 ป้องกันงานค้างด้วย Waiting Part</div>
+          <div class="card-desc">
+            แยกแยะได้ชัดเจนว่างานซ่อมใดกำลังรออะไหล่ ช่วยให้ฝ่ายจัดซื้อจัดหาชิ้นส่วนได้เร็วขึ้น ป้องกันเครื่องจักรถูกทอดทิ้งโดยไม่มีอะไหล่
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📈 ยกระดับมาตรฐาน TPM / OEE</div>
+          <div class="card-desc">
+            มีข้อมูลสถิติที่บันทึกไว้อย่างแม่นยำ สามารถนำไปคำนวณค่า OEE (Overall Equipment Effectiveness) และวางแผนบำรุงรักษาเชิงป้องกัน (PM) ได้อย่างแม่นยำ
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>INDUSTRIAL VALUE PROPOSITION & EFFICIENCY BOOST</span>
+      <span>สไลด์ 14 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 15: AI UTILIZATION [Presenter 3] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">3. รายงานการใช้ AI ในการพัฒนา</div>
+      <div class="presenter-pill p3">👤 ผู้บรรยายคนที่ 3</div>
+    </div>
+    <div class="slide-title-area">
+      <h2 class="slide-title">กระบวนการพัฒนาและร่วมงานกับ AI (AI Engineering Journey)</h2>
+      <div class="slide-subtitle">การใช้ AI เป็นวิศวกรคู่คิด (Pair Programmer) ในทุกขั้นตอนการพัฒนาซอฟต์แวร์</div>
+    </div>
+    <div class="slide-body">
+      <table class="slide-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">ขั้นตอนการพัฒนา</th>
+            <th style="width: 35%;">การทำงานร่วมกับ AI</th>
+            <th style="width: 40%;">ผลลัพธ์ที่ได้</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Requirement Analysis</strong></td>
+            <td>ให้ AI วิเคราะห์โจทย์รายวิชาและแตกเป็น Milestones งาน</td>
+            <td>แผนงาน 10 สเต็ปครอบคลุม 100% ตามข้อกำหนด 3.1 - 3.12</td>
+          </tr>
+          <tr>
+            <td><strong>2. Database Architecture</strong></td>
+            <td>ให้ AI ช่วยออกแบบ Schema แบบ Normalized พร้อม RLS</td>
+            <td>โค้ด SQL ที่มี Foreign Keys และ Security Policy รัดกุม</td>
+          </tr>
+          <tr>
+            <td><strong>3. Code Implementation</strong></td>
+            <td>ใช้ AI สร้าง Component UI, Contexts และ Data Models</td>
+            <td>หน้าจอ SCADA Industrial Theme ที่รองรับทั้ง Dark & Light Mode</td>
+          </tr>
+          <tr>
+            <td><strong>4. Debugging & CI/CD</strong></td>
+            <td>ให้ AI ตรวจสอบ Type, ESLint Warnings และ Unused Imports</td>
+            <td>โค้ดผ่านการคอมไพล์ 0 errors ใน GitHub Actions และ Vercel</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>AI-ASSISTED SOFTWARE DEVELOPMENT LIFECYCLE</span>
+      <span>สไลด์ 15 / 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 16: CONCLUSION & QA [All Presenters] ==================== -->
+  <div class="slide">
+    <div class="slide-header">
+      <div class="slide-category">บทสรุปและช่วงถาม-ตอบ</div>
+      <div class="presenter-pill pall">👥 ทีมงานทั้ง 3 คน</div>
+    </div>
+    <div class="slide-body">
+      <div class="title-slide-content">
+        <div style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); font-family: 'Prompt', sans-serif; font-size: 9pt; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; font-weight: 600;">
+          MISSION ACCOMPLISHED • 100% PRODUCTION READY
+        </div>
+        <div class="main-title" style="font-size: 24pt;">สรุปผลการส่งมอบโครงการ</div>
+        <div class="main-subtitle" style="max-width: 600px; margin-bottom: 18px;">
+          ระบบ Alarm & Maintenance Management System ได้รับการพัฒนา ตรวจสอบ และส่งมอบครบถ้วนสมบูรณ์ตามเกณฑ์ 100 คะแนน และฟังก์ชันโบนัส +10 คะแนน
+        </div>
+        
+        <div class="grid-2" style="width: 100%; max-width: 700px; text-align: left; margin-bottom: 15px;">
+          <div class="card" style="padding: 10px;">
+            <div class="card-title" style="font-size: 9.5pt;">🐙 GitHub Repository</div>
+            <div style="font-size: 8pt; font-family: 'JetBrains Mono'; color: #38bdf8;">
+              github.com/siriwat-kum-cmyk/PLC-WEB
+            </div>
+          </div>
+          <div class="card" style="padding: 10px;">
+            <div class="card-title" style="font-size: 9.5pt;">▲ Live Production</div>
+            <div style="font-size: 8pt; font-family: 'JetBrains Mono'; color: #34d399;">
+              Deploy เรียบร้อยบน Vercel พร้อม Dual-Mode
+            </div>
+          </div>
+        </div>
+
+        <div style="font-family: 'Prompt', sans-serif; font-size: 16pt; font-weight: bold; color: #ffffff;">
+          ขอขอบคุณท่านอาจารย์และผู้เข้าร่วมรับฟังทุกท่าน<br>
+          <span style="font-size: 11pt; color: #38bdf8; font-weight: 400;">— เปิดรับคำถามและข้อเสนอแนะ (Q&A Session) —</span>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>PROGRAMMING IN AUTOMATION SYSTEMS • 2026</span>
+      <span>สไลด์ 16 / 16</span>
+    </div>
+  </div>
+
+</body>
+</html>
