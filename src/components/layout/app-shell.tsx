@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Header } from "./header";
 import { Sidebar } from "./sidebar";
 import { useAuth } from "@/context/auth-context";
@@ -12,14 +13,21 @@ interface AppShellProps {
 }
 
 export function AppShell({ children, requiredRole }: AppShellProps) {
-  const { role, isLoading } = useAuth();
+  const { user, role, isLoading } = useAuth();
+  const router = useRouter();
 
-  if (isLoading) {
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.replace("/login");
+    }
+  }, [isLoading, user, router]);
+
+  if (isLoading || !user) {
     return (
       <div className="min-h-screen bg-[#0B0F17] light:bg-slate-100 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
-          <span className="text-xs font-mono text-cyan-400">LOADING SCADA SYSTEM...</span>
+          <span className="text-xs font-mono text-cyan-400">CHECKING SECURITY SESSION...</span>
         </div>
       </div>
     );
@@ -43,7 +51,7 @@ export function AppShell({ children, requiredRole }: AppShellProps) {
                 <span className="font-mono uppercase text-slate-200 light:text-slate-800">{role}</span>
               </p>
               <p className="text-[11px] text-slate-400 light:text-slate-500 mt-3">
-                💡 สลับ Role เป็น Admin ได้ที่แถบด้านบนขวาของหน้าจอ
+                💡 หากต้องการเข้าถึงฟังก์ชันนี้ กรุณาออกจากระบบแล้วล็อกอินด้วยบัญชี Admin
               </p>
             </div>
           ) : (

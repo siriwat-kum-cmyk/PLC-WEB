@@ -25,20 +25,25 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserProfile | null>(INITIAL_PROFILES[0]); // Default to Admin for easy testing
+  const [user, setUser] = useState<UserProfile | null>(null); // Default to unauthenticated (null)
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check local storage for persisted demo session
+    // Check local storage for persisted user session
     const saved = localStorage.getItem("plc_auth_user");
     if (saved) {
       try {
-        setUser(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.email) {
+          setUser(parsed);
+        } else {
+          setUser(null);
+        }
       } catch {
-        setUser(INITIAL_PROFILES[0]);
+        setUser(null);
       }
     } else {
-      setUser(INITIAL_PROFILES[0]);
+      setUser(null);
     }
 
     // Check Supabase session if configured
@@ -110,11 +115,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    // Demo Mode Fallback
-    const matched = INITIAL_PROFILES.find((p) => p.email.toLowerCase() === email.toLowerCase());
+    // Demo / Offline Mode Fallback
+    const matched = INITIAL_PROFILES.find(
+      (p) =>
+        p.email.toLowerCase() === email.toLowerCase() ||
+        (email.toLowerCase().includes("admin") && p.role === "admin") ||
+        (email.toLowerCase().includes("tech") && p.role === "technician") ||
+        (email.toLowerCase().includes("viewer") && p.role === "viewer")
+    );
     if (matched) {
-      setUser(matched);
-      localStorage.setItem("plc_auth_user", JSON.stringify(matched));
+      const u: UserProfile = {
+        ...matched,
+        email: email || matched.email,
+      };
+      setUser(u);
+      localStorage.setItem("plc_auth_user", JSON.stringify(u));
       return { success: true };
     }
 
@@ -141,16 +156,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem("plc_auth_user");
   };
 
-  const role = user?.role || "viewer";
-  const isAdmin = role === "admin";
-  const isTechnician = role === "technician";
-  const isViewer = role === "viewer";
+  const role: UserRole = user?.role || "viewer";
+  const isAdmin = !!user && user.role === "admin";
+  const isTechnician = !!user && user.role === "technician";
+  const isViewer = !user || user.role === "viewer";
 
   // Permission matrices
   const canManageMachines = isAdmin;
   const canEditMaintenance = isAdmin || isTechnician;
   const canUpdateAlarm = isAdmin || isTechnician;
-  const canViewAuditLogs = isAdmin || isTechnician;
+  const canViewAuditLogs = isAdmin;
 
   return (
     <AuthContext.Provider
