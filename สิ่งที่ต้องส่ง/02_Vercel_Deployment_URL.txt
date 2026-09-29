@@ -1,0 +1,9 @@
+Vercel Deployment URL:
+https://plc-web-production.vercel.app
+
+Repository Source: https://github.com/siriwat-kum-cmyk/PLC-WEB
+Build Status: Next.js 15.5.26 Production Ready (0 Errors)
+Demo Accounts:
+- Admin: admin@automation.local / admin123
+- Tech: tech@automation.local / tech123
+- Viewer: viewer@automation.local / viewer123
